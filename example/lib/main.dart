@@ -41,7 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                showNetPromoterScore(context: context, );
+              },
               child: Text("Show NPS"),
               color: Colors.grey,
             ),
