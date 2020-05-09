@@ -6,55 +6,89 @@ import 'package:flutter_net_promoter_score/nps_select_score_widget.dart';
 import 'package:flutter_net_promoter_score/nps_thank_you_widget.dart';
 
 /// Show a modal Net Promoter Score as a material design bottom sheet.
-Future<T> showNetPromoterScore<T>({
-  @required BuildContext context,
-}) {
+Future<T> showNetPromoterScore<T>(
+    {@required BuildContext context,
+    VoidCallback onClosePressed,
+    Function(NetPromoterScoreResult result) onSurveyCompleted}) {
   return showModalBottomSheet(
+      isDismissible: false,
+      isScrollControlled: true,
       context: context,
       builder: (context) {
-        return FlutterNetPromoterScore();
+        return FlutterNetPromoterScore(
+          onClosePressed: onClosePressed,
+          onSurveyCompleted: onSurveyCompleted,
+        );
       });
 }
 
+enum PromoterType {
+  promoter, // (9 =< Score <= 10)
+  passive, // (7 =< Score <= 8)
+  detractor, // (0 =< Score <= 6)
+  unknown
+}
+
+class NetPromoterScoreResult {
+  int score;
+  String feedback;
+  PromoterType promoterType = PromoterType.unknown;
+}
+
 class FlutterNetPromoterScore extends StatefulWidget {
+  final VoidCallback onClosePressed;
+  final void Function(NetPromoterScoreResult result) onSurveyCompleted;
+
+  FlutterNetPromoterScore({this.onSurveyCompleted, this.onClosePressed});
+
   @override
   FlutterNetPromoterScoreState createState() => FlutterNetPromoterScoreState();
 }
 
 class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
+  
   int _currentPage = 0;
+  List<Widget> _pages = List<Widget>();
 
   @override
   void initState() {
     super.initState();
     _currentPage = 0;
+    
+    // NpsSelectScoreWidget
+    _pages.add(NpsSelectScoreWidget(
+      onSendButtonPressed: () {
+        setState(() {
+          _currentPage = 1;
+        });
+      },
+    ));
+
+    // NpsFeedbackWidget
+    _pages.add(NpsFeedbackWidget(
+      onEditScoreButtonPressed: () {
+        setState(() {
+          _currentPage = 0;
+        });
+      },
+      onSendButtonPressed: () {
+        setState(() {
+          _currentPage = 2;
+        });
+
+        // Dismiss after delay
+        Future.delayed(const Duration(milliseconds: 2000), () {
+          Navigator.pop(context);
+        });
+      },
+    ));
+
+    // NpsThankYouWidget
+    _pages.add(NpsThankYouWidget());
   }
 
   Widget _getCurrentPage() {
-    if (_currentPage == 0) {
-      return NpsSelectScoreWidget(
-        onSendButtonPressed: () {
-          setState(() {
-            _currentPage = 1;
-          });
-        },
-      );
-    } else if (_currentPage == 1) {
-      return NpsFeedbackWidget(
-        onEditScoreButtonPressed: () {
-          setState(() {
-            _currentPage = 0;
-          });
-        },
-        onSendButtonPressed: () {
-          setState(() {
-            _currentPage = 2;
-          });
-        },
-      );
-    } else {
-      return NpsThankYouWidget();
-    }
+    return _pages[_currentPage];
   }
 
   @override
@@ -66,7 +100,6 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
         ),
         child: Container(
           child: _getCurrentPage(),
-          height: 240,
         ),
       ),
     );

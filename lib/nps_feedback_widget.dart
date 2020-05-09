@@ -31,9 +31,9 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
       ),
     );
 
-    return Container(
-      child: Center(
-          child: Column(
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
             height: 10,
@@ -64,7 +64,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
             ],
           )
         ],
-      )),
+      ),
     );
   }
 }

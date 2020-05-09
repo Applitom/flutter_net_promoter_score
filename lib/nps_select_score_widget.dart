@@ -11,11 +11,13 @@ class NpsSelectScoreWidget extends StatefulWidget {
 }
 
 class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
+
+  int _scoreValue = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-          child: Column(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
             height: 10,
@@ -31,8 +33,12 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             height: 10,
           ),
           Slider(
-            onChanged: (double value) {},
-            value: 0,
+            onChanged: (double value) {
+              setState(() {
+                _scoreValue = value.toInt();
+              });
+            },
+            value: _scoreValue.toDouble(),
             min: 0.0,
             max: 10.0,
           ),
@@ -47,7 +53,6 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             color: Colors.grey,
           )
         ],
-      )),
-    );
+      );
   }
 }

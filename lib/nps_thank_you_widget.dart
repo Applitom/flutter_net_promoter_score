@@ -8,13 +8,11 @@ class NpsThankYouWidget extends StatefulWidget {
 class NpsThankYouWidgetState extends State<NpsThankYouWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-          child: Column(
+    return  Column(
+      mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text("NpsThankYouWidget")
         ],
-      )),
     );
   }
 }
