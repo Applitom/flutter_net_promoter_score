@@ -46,7 +46,6 @@ class FlutterNetPromoterScore extends StatefulWidget {
 }
 
 class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
-  
   int _currentPage = 0;
   List<Widget> _pages = List<Widget>();
 
@@ -54,7 +53,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   void initState() {
     super.initState();
     _currentPage = 0;
-    
+
     // NpsSelectScoreWidget
     _pages.add(NpsSelectScoreWidget(
       onSendButtonPressed: () {
@@ -99,7 +98,24 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: Container(
-          child: _getCurrentPage(),
+          child: AnimatedSwitcher(
+            child: _getCurrentPage(),
+            duration: const Duration(milliseconds: 400),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              final outAnimation =
+                  Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+                      .animate(animation);
+              return ClipRect(
+                child: SlideTransition(
+                  position: outAnimation,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: child,
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
