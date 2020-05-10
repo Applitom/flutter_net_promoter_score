@@ -46,25 +46,31 @@ class FlutterNetPromoterScore extends StatefulWidget {
 }
 
 class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
+  int _currentScore;
+  String _currentFeedbackText = "";
+
   int _currentPage = 0;
-  List<Widget> _pages = List<Widget>();
+  List<Widget Function()> _pageBuilders = List<Widget Function()>();
 
   @override
   void initState() {
     super.initState();
+    _pageBuilders.add(_npsSelectScoreWidgetBuilder);
+    _pageBuilders.add(_npsFeedbackWidgetBuilder);
+    _pageBuilders.add(_npsThankYouWidgetBuilder);    
     _currentPage = 0;
+  }
 
-    // NpsSelectScoreWidget
-    _pages.add(NpsSelectScoreWidget(
-      onSendButtonPressed: () {
-        setState(() {
-          _currentPage = 1;
-        });
-      },
-    ));
+  Widget _getCurrentPage() {
+    return _pageBuilders[_currentPage]();
+  }
 
-    // NpsFeedbackWidget
-    _pages.add(NpsFeedbackWidget(
+  Widget _npsThankYouWidgetBuilder() {
+    return NpsThankYouWidget();
+  }
+
+  Widget _npsFeedbackWidgetBuilder() {
+    return NpsFeedbackWidget(
       onEditScoreButtonPressed: () {
         setState(() {
           _currentPage = 0;
@@ -75,19 +81,42 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
           _currentPage = 2;
         });
 
+        _finilizeResult();
+
         // Dismiss after delay
         Future.delayed(const Duration(milliseconds: 2000), () {
           Navigator.pop(context);
         });
       },
-    ));
-
-    // NpsThankYouWidget
-    _pages.add(NpsThankYouWidget());
+      onFeedbackTextChanged: (String feedbackText) {
+        print("New feedback text is $feedbackText");
+        _currentFeedbackText = feedbackText;
+      },
+    );
   }
 
-  Widget _getCurrentPage() {
-    return _pages[_currentPage];
+  Widget _npsSelectScoreWidgetBuilder() {
+    return NpsSelectScoreWidget(
+      onSendButtonPressed: () {
+        setState(() {
+          _currentPage = 1;
+        });
+      },
+      onScoreChanged: (int score) {
+        print("New score is $score");
+        _currentScore = score;
+      },
+      score: _currentScore,
+    );
+  }
+
+  void _finilizeResult() {
+    NetPromoterScoreResult finalResult = NetPromoterScoreResult();
+    finalResult.score = _currentScore;
+    finalResult.feedback = _currentFeedbackText;
+    finalResult.promoterType = PromoterType.unknown; // TODO: calculate type
+
+    this.widget.onSurveyCompleted(finalResult);
   }
 
   @override

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class NpsSelectScoreWidget extends StatefulWidget {
-  final Key key;
-  final VoidCallback onSendButtonPressed;
+  
 
-  const NpsSelectScoreWidget({this.key, this.onSendButtonPressed});
+  final int score;
+  final VoidCallback onSendButtonPressed;
+  final void Function(int score) onScoreChanged;
+
+  NpsSelectScoreWidget(
+      {Key key, this.onSendButtonPressed, this.onScoreChanged, this.score}) : super(key: key);
 
   @override
   NpsSelectScoreWidgetState createState() => new NpsSelectScoreWidgetState();
@@ -12,47 +16,54 @@ class NpsSelectScoreWidget extends StatefulWidget {
 
 class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
 
-  int _scoreValue = 0;
+  int _currentScore;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentScore = this.widget.score;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "How likely are you to recommaned the XXX app to a ferind or colleague?",
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Slider(
-            onChanged: (double value) {
+      children: <Widget>[
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          "How likely are you to recommaned the XXX app to a ferind or colleague?",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Slider(
+          onChanged: (double value) {
+            int newScore = value.toInt();
+            if (this.widget.score != newScore) {
               setState(() {
-                _scoreValue = value.toInt();
+                _currentScore = value.toInt();
               });
-            },
-            value: _scoreValue.toDouble(),
-            min: 0.0,
-            max: 10.0,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          MaterialButton(
-            onPressed: () {
-              this.widget.onSendButtonPressed();
-            },
-            child: Text("SEND"),
-            color: Colors.grey,
-          )
-        ],
-      );
+              this.widget.onScoreChanged(_currentScore);
+            }
+          },
+          value: _currentScore != null ? _currentScore.toDouble() : 0,
+          min: 0.0,
+          max: 10.0,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        MaterialButton(
+          onPressed: () {
+            this.widget.onSendButtonPressed();
+          },
+          child: Text("SEND"),
+          color: Colors.grey,
+        )
+      ],
+    );
   }
 }

@@ -2,17 +2,31 @@ import 'package:flutter/material.dart';
 
 class NpsFeedbackWidget extends StatefulWidget {
   final Key key;
+  final String feedbackText;
   final VoidCallback onEditScoreButtonPressed;
   final VoidCallback onSendButtonPressed;
+  final Function(String feedbackText) onFeedbackTextChanged;
 
-  const NpsFeedbackWidget(
-      {this.key, this.onEditScoreButtonPressed, this.onSendButtonPressed});
+  NpsFeedbackWidget(
+      {this.key, this.onEditScoreButtonPressed, this.onSendButtonPressed, this.onFeedbackTextChanged, this.feedbackText});
 
   @override
   NpsFeedbackWidgetState createState() => new NpsFeedbackWidgetState();
 }
 
 class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
+  final _feedbackTextFieldController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _feedbackTextFieldController.addListener(_feedbackTextChanged);
+  }
+  
+  void _feedbackTextChanged() {
+    this.widget.onFeedbackTextChanged(_feedbackTextFieldController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget feedbackTextField = Container(
@@ -24,7 +38,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
           color: Colors.grey[300], borderRadius: BorderRadius.circular(10)),
       child: TextField(
         maxLines: 3,
-        // controller: desciptionController,
+        controller: _feedbackTextFieldController,
         decoration: InputDecoration.collapsed(
             hintText:
                 "Let us know if there's anything you want to share with us"),
