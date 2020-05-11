@@ -1,9 +1,12 @@
 library flutter_net_promoter_score;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_net_promoter_score/nps_feedback_widget.dart';
-import 'package:flutter_net_promoter_score/nps_select_score_widget.dart';
-import 'package:flutter_net_promoter_score/nps_thank_you_widget.dart';
+import 'package:flutter_net_promoter_score/widgets/nps_feedback_widget.dart';
+import 'package:flutter_net_promoter_score/widgets/nps_select_score_widget.dart';
+import 'package:flutter_net_promoter_score/widgets/nps_thank_you_widget.dart';
+import 'package:flutter_net_promoter_score/model/promoter_type.dart';
+import 'model/net_promoter_score_result.dart';
+import 'model/nps_survey_page.dart';
 
 /// Show a modal Net Promoter Score as a material design bottom sheet.
 Future<T> showNetPromoterScore<T>(
@@ -22,19 +25,6 @@ Future<T> showNetPromoterScore<T>(
       });
 }
 
-enum PromoterType {
-  promoter, // (9 =< Score <= 10)
-  passive, // (7 =< Score <= 8)
-  detractor, // (0 =< Score <= 6)
-  unknown
-}
-
-class NetPromoterScoreResult {
-  int score;
-  String feedback;
-  PromoterType promoterType = PromoterType.unknown;
-}
-
 class FlutterNetPromoterScore extends StatefulWidget {
   final VoidCallback onClosePressed;
   final void Function(NetPromoterScoreResult result) onSurveyCompleted;
@@ -49,7 +39,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   int _currentScore;
   String _currentFeedbackText = "";
 
-  int _currentPage = 0;
+  NpsSurveyPage _currentPage = NpsSurveyPage.score;
   List<Widget Function()> _pageBuilders = List<Widget Function()>();
 
   @override
@@ -57,12 +47,12 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
     super.initState();
     _pageBuilders.add(_npsSelectScoreWidgetBuilder);
     _pageBuilders.add(_npsFeedbackWidgetBuilder);
-    _pageBuilders.add(_npsThankYouWidgetBuilder);    
-    _currentPage = 0;
+    _pageBuilders.add(_npsThankYouWidgetBuilder);
+    _currentPage = NpsSurveyPage.score;
   }
 
   Widget _getCurrentPage() {
-    return _pageBuilders[_currentPage]();
+    return _pageBuilders[_currentPage.index]();
   }
 
   Widget _npsThankYouWidgetBuilder() {
@@ -72,14 +62,10 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   Widget _npsFeedbackWidgetBuilder() {
     return NpsFeedbackWidget(
       onEditScoreButtonPressed: () {
-        setState(() {
-          _currentPage = 0;
-        });
+        setState(() => _currentPage = NpsSurveyPage.score);
       },
       onSendButtonPressed: () {
-        setState(() {
-          _currentPage = 2;
-        });
+        setState(() => _currentPage = NpsSurveyPage.thankYou);
 
         _finilizeResult();
 
@@ -98,9 +84,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   Widget _npsSelectScoreWidgetBuilder() {
     return NpsSelectScoreWidget(
       onSendButtonPressed: () {
-        setState(() {
-          _currentPage = 1;
-        });
+        setState(() => _currentPage = NpsSurveyPage.feedback);
       },
       onScoreChanged: (int score) {
         print("New score is $score");
@@ -111,12 +95,14 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   }
 
   void _finilizeResult() {
-    NetPromoterScoreResult finalResult = NetPromoterScoreResult();
-    finalResult.score = _currentScore;
-    finalResult.feedback = _currentFeedbackText;
-    finalResult.promoterType = PromoterType.unknown; // TODO: calculate type
+    if (this.widget.onSurveyCompleted != null) {
+      NetPromoterScoreResult finalResult = NetPromoterScoreResult();
+      finalResult.score = _currentScore;
+      finalResult.feedback = _currentFeedbackText;
+      finalResult.promoterType = _currentScore.toPromoterType();
 
-    this.widget.onSurveyCompleted(finalResult);
+      this.widget.onSurveyCompleted(finalResult);
+    }
   }
 
   @override

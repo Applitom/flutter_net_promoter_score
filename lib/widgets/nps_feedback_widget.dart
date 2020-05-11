@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class NpsFeedbackWidget extends StatefulWidget {
-  final Key key;
   final String feedbackText;
   final VoidCallback onEditScoreButtonPressed;
   final VoidCallback onSendButtonPressed;
   final Function(String feedbackText) onFeedbackTextChanged;
 
-  NpsFeedbackWidget(
-      {this.key, this.onEditScoreButtonPressed, this.onSendButtonPressed, this.onFeedbackTextChanged, this.feedbackText});
+  NpsFeedbackWidget({
+    Key key,
+    this.onEditScoreButtonPressed,
+    this.onSendButtonPressed,
+    this.onFeedbackTextChanged,
+    this.feedbackText,
+  }) : super(key: key);
 
   @override
   NpsFeedbackWidgetState createState() => new NpsFeedbackWidgetState();
@@ -22,7 +26,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
     super.initState();
     _feedbackTextFieldController.addListener(_feedbackTextChanged);
   }
-  
+
   void _feedbackTextChanged() {
     this.widget.onFeedbackTextChanged(_feedbackTextFieldController.text);
   }

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
 class NpsSelectScoreWidget extends StatefulWidget {
-  
-
   final int score;
   final VoidCallback onSendButtonPressed;
   final void Function(int score) onScoreChanged;
 
-  NpsSelectScoreWidget(
-      {Key key, this.onSendButtonPressed, this.onScoreChanged, this.score}) : super(key: key);
+  NpsSelectScoreWidget({
+    Key key,
+    this.onSendButtonPressed,
+    this.onScoreChanged,
+    this.score,
+  }) : super(key: key);
 
   @override
   NpsSelectScoreWidgetState createState() => new NpsSelectScoreWidgetState();
 }
 
 class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
-
   int _currentScore;
 
   @override
@@ -42,7 +43,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
         Slider(
           onChanged: (double value) {
             int newScore = value.toInt();
-            if (this.widget.score != newScore) {
+            if (_currentScore != newScore) {
               setState(() {
                 _currentScore = value.toInt();
               });

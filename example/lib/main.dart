@@ -42,7 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             FlatButton(
               onPressed: () {
-                showNetPromoterScore(context: context, );
+                showNetPromoterScore(
+                  context: context,
+                  onSurveyCompleted: (result) {
+                    print("NPS Completed");
+                    print("Score: ${result.score}");
+                    print("Feedback: ${result.feedback}");
+                    print("Promoter Type: ${result.promoterType}");
+                  },
+                );
               },
               child: Text("Show NPS"),
               color: Colors.grey,
