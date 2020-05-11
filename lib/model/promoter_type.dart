@@ -8,16 +8,16 @@ enum PromoterType {
 
 extension IntToPromoterTypeExtention on int {
   PromoterType toPromoterType() {
-    PromoterType promoterType = PromoterType.unknown;
-
-    if (this >= 0 && this <= 6) {
-      promoterType = PromoterType.detractor;
+    if (this == null) {
+      return PromoterType.unknown;
+    } else if (this >= 0 && this <= 6) {
+      return PromoterType.detractor;
     } else if (this >= 7 && this <= 8) {
-      promoterType = PromoterType.passive;
+      return PromoterType.passive;
     } else if (this >= 9 && this <= 10) {
-      promoterType = PromoterType.promoter;
+      return PromoterType.promoter;
+    } else {
+      return PromoterType.unknown;
     }
-
-    return promoterType;
   }
 }

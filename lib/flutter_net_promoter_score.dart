@@ -45,14 +45,14 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   @override
   void initState() {
     super.initState();
-    _pageBuilders.add(_npsSelectScoreWidgetBuilder);
-    _pageBuilders.add(_npsFeedbackWidgetBuilder);
-    _pageBuilders.add(_npsThankYouWidgetBuilder);
+    _setupPageBuilders();
     _currentPage = NpsSurveyPage.score;
   }
 
-  Widget _getCurrentPage() {
-    return _pageBuilders[_currentPage.index]();
+  void _setupPageBuilders() {
+    _pageBuilders.add(_npsSelectScoreWidgetBuilder);
+    _pageBuilders.add(_npsFeedbackWidgetBuilder);
+    _pageBuilders.add(_npsThankYouWidgetBuilder);
   }
 
   Widget _npsThankYouWidgetBuilder() {
@@ -78,6 +78,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
         print("New feedback text is $feedbackText");
         _currentFeedbackText = feedbackText;
       },
+      feedbackText: _currentFeedbackText,
     );
   }
 
@@ -114,7 +115,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
         ),
         child: Container(
           child: AnimatedSwitcher(
-            child: _getCurrentPage(),
+            child: _pageBuilders[_currentPage.index](),
             duration: const Duration(milliseconds: 400),
             transitionBuilder: (Widget child, Animation<double> animation) {
               final outAnimation =

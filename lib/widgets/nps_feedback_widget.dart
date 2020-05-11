@@ -25,6 +25,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
   void initState() {
     super.initState();
     _feedbackTextFieldController.addListener(_feedbackTextChanged);
+    _feedbackTextFieldController.text = this.widget.feedbackText;
   }
 
   void _feedbackTextChanged() {
@@ -35,17 +36,23 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
   Widget build(BuildContext context) {
     Widget feedbackTextField = Container(
       height: 90,
-      // alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 10,
+      ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
       decoration: BoxDecoration(
-          color: Colors.grey[300], borderRadius: BorderRadius.circular(10)),
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: TextField(
         maxLines: 3,
         controller: _feedbackTextFieldController,
         decoration: InputDecoration.collapsed(
-            hintText:
-                "Let us know if there's anything you want to share with us"),
+          hintText: "Let us know if there's anything you want to share with us",
+        ),
       ),
     );
 
