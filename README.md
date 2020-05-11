@@ -15,7 +15,5 @@ Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedia.
 ## Change Log
 See [Change Log](./CHANGELOG.md) page.
 
-## Contributing
-
 ## Author
 [Tomer Shalom](http://applitom.com)
