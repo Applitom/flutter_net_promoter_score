@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_net_promoter_score/widgets/score_slider.dart';
 
 class NpsSelectScoreWidget extends StatefulWidget {
   final int score;
@@ -40,26 +41,22 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
         SizedBox(
           height: 10,
         ),
-        Slider(
-          onChanged: (double value) {
-            int newScore = value.toInt();
-            if (_currentScore != newScore) {
-              setState(() {
-                _currentScore = value.toInt();
-              });
-              this.widget.onScoreChanged(_currentScore);
-            }
+        ScoreSlider(
+          maxScore: 10,
+          score: _currentScore,
+          onScorChanged: (int newScore) {
+            setState(() => _currentScore = newScore);
+            this.widget.onScoreChanged(_currentScore);
           },
-          value: _currentScore != null ? _currentScore.toDouble() : 0,
-          min: 0.0,
-          max: 10.0,
         ),
         SizedBox(
           height: 10,
         ),
         MaterialButton(
           onPressed: () {
-            this.widget.onSendButtonPressed();
+            if (this._currentScore != null) {
+              this.widget.onSendButtonPressed();
+            }
           },
           child: Text("SEND"),
           color: Colors.grey,

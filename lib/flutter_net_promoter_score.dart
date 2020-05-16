@@ -37,7 +37,7 @@ class FlutterNetPromoterScore extends StatefulWidget {
 
 class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   int _currentScore;
-  String _currentFeedbackText = "";
+  String _currentFeedbackText;
 
   NpsSurveyPage _currentPage = NpsSurveyPage.score;
   List<Widget Function()> _pageBuilders = List<Widget Function()>();

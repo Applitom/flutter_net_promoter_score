@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_net_promoter_score/model/promoter_type.dart';
 
 class NpsFeedbackWidget extends StatefulWidget {
   final String feedbackText;
   final VoidCallback onEditScoreButtonPressed;
   final VoidCallback onSendButtonPressed;
+  final PromoterType promoterType;
+
   final Function(String feedbackText) onFeedbackTextChanged;
 
   NpsFeedbackWidget({
@@ -12,6 +15,7 @@ class NpsFeedbackWidget extends StatefulWidget {
     this.onSendButtonPressed,
     this.onFeedbackTextChanged,
     this.feedbackText,
+    this.promoterType
   }) : super(key: key);
 
   @override
@@ -30,6 +34,14 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
 
   void _feedbackTextChanged() {
     this.widget.onFeedbackTextChanged(_feedbackTextFieldController.text);
+  }
+
+  String _hintTextForFeedbackTextField(){
+    String hintText = "Let us know if there's anything you want to share with us";
+    if (this.widget.promoterType != null) {
+
+    }
+    return hintText;
   }
 
   @override
@@ -51,7 +63,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
         maxLines: 3,
         controller: _feedbackTextFieldController,
         decoration: InputDecoration.collapsed(
-          hintText: "Let us know if there's anything you want to share with us",
+          hintText: _hintTextForFeedbackTextField(),
         ),
       ),
     );

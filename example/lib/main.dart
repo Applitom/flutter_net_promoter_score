@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_net_promoter_score/flutter_net_promoter_score.dart';
 
@@ -31,6 +33,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    super.initState();
+    Timer.run(() { _showNPS(); });
+  }
+
+  void _showNPS() {
+    showNetPromoterScore(
+      context: context,
+      onSurveyCompleted: (result) {
+        print("NPS Completed");
+        print("Score: ${result.score}");
+        print("Feedback: ${result.feedback}");
+        print("Promoter Type: ${result.promoterType}");
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -42,15 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             FlatButton(
               onPressed: () {
-                showNetPromoterScore(
-                  context: context,
-                  onSurveyCompleted: (result) {
-                    print("NPS Completed");
-                    print("Score: ${result.score}");
-                    print("Feedback: ${result.feedback}");
-                    print("Promoter Type: ${result.promoterType}");
-                  },
-                );
+                _showNPS();
               },
               child: Text("Show NPS"),
               color: Colors.grey,
