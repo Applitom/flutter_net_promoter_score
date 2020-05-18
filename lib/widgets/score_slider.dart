@@ -31,7 +31,7 @@ class ScoreSliderState extends State<ScoreSlider> {
     for (var i = 0; i <= this.widget.maxScore; i++) {
       dots.add(GestureDetector(
         onTap: () {
-          setState(() => _currentScore = i );
+          setState(() => _currentScore = i);
           if (this.widget.onScorChanged != null) {
             this.widget.onScorChanged(_currentScore);
           }
@@ -55,23 +55,44 @@ class ScoreSliderState extends State<ScoreSlider> {
     return dots;
   }
 
+  void _handlePanGesture(BoxConstraints size, Offset localPosition) {
+    double socreWidth = size.maxWidth / (this.widget.maxScore + 1);
+    double x = localPosition.dx;
+    int calculatedScore = x ~/ socreWidth;
+    setState(() => _currentScore = calculatedScore);
+    if (this.widget.onScorChanged != null) {
+      this.widget.onScorChanged(_currentScore);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: LayoutBuilder(
         builder: (context, size) {
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(100)),
-              color: _backgroundColor,
-            ),
-            height: size.maxWidth / (this.widget.maxScore + 1),
-            child: Stack(
-              children: <Widget>[
-                Row(
-                  children: _dots(size),
-                )
-              ],
+          return GestureDetector(
+            onPanDown: (details){
+              _handlePanGesture(size, details.localPosition);
+            },
+            onPanStart: (details) {
+              _handlePanGesture(size, details.localPosition);
+            },
+            onPanUpdate: (details) {
+              _handlePanGesture(size, details.localPosition);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(100)),
+                color: _backgroundColor,
+              ),
+              height: size.maxWidth / (this.widget.maxScore + 1),
+              child: Stack(
+                children: <Widget>[
+                  Row(
+                    children: _dots(size),
+                  )
+                ],
+              ),
             ),
           );
         },
