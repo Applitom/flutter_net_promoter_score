@@ -43,6 +43,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
         ),
         ScoreSlider(
           maxScore: 10,
+          minScore: 0,
           score: _currentScore,
           onScorChanged: (int newScore) {
             setState(() => _currentScore = newScore);
