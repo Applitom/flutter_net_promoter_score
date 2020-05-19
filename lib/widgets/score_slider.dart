@@ -27,29 +27,28 @@ class ScoreSliderState extends State<ScoreSlider> {
     List<Widget> dots = List<Widget>();
 
     double width = size.maxWidth / (this.widget.maxScore + 1);
+    double selectedScoreWidth = size.maxWidth / this.widget.maxScore / 1.5;
+    double dotWidth = size.maxWidth / this.widget.maxScore / 4;
 
     for (var i = 0; i <= this.widget.maxScore; i++) {
-      dots.add(GestureDetector(
-        onTap: () {
-          setState(() => _currentScore = i);
-          if (this.widget.onScorChanged != null) {
-            this.widget.onScorChanged(_currentScore);
-          }
-        },
-        child: Container(
+      double currentWidth = i == _currentScore ? selectedScoreWidth : dotWidth;
+
+      dots.add(
+        Container(
           width: width,
           child: Center(
-            child: CircleAvatar(
-              maxRadius: i == _currentScore
-                  ? size.maxWidth / this.widget.maxScore / 4
-                  : (size.maxWidth / this.widget.maxScore) / 8,
-              backgroundColor:
-                  i == _currentScore ? _thumbColor : _valueDotsColor,
+            child: SizedBox(
+              width: currentWidth,
+              height: currentWidth,
+              child: CircleAvatar(
+                backgroundColor:
+                    i == _currentScore ? _thumbColor : _valueDotsColor,
+              ),
             ),
           ),
           color: Colors.transparent,
         ),
-      ));
+      );
     }
 
     return dots;
@@ -59,9 +58,13 @@ class ScoreSliderState extends State<ScoreSlider> {
     double socreWidth = size.maxWidth / (this.widget.maxScore + 1);
     double x = localPosition.dx;
     int calculatedScore = x ~/ socreWidth;
-    setState(() => _currentScore = calculatedScore);
-    if (this.widget.onScorChanged != null) {
-      this.widget.onScorChanged(_currentScore);
+    if (calculatedScore != _currentScore &&
+        calculatedScore <= this.widget.maxScore &&
+        calculatedScore >= 0) {
+      setState(() => _currentScore = calculatedScore);
+      if (this.widget.onScorChanged != null) {
+        this.widget.onScorChanged(_currentScore);
+      }
     }
   }
 
@@ -71,7 +74,7 @@ class ScoreSliderState extends State<ScoreSlider> {
       child: LayoutBuilder(
         builder: (context, size) {
           return GestureDetector(
-            onPanDown: (details){
+            onPanDown: (details) {
               _handlePanGesture(size, details.localPosition);
             },
             onPanStart: (details) {
@@ -85,7 +88,8 @@ class ScoreSliderState extends State<ScoreSlider> {
                 borderRadius: BorderRadius.all(Radius.circular(100)),
                 color: _backgroundColor,
               ),
-              height: size.maxWidth / (this.widget.maxScore + 1),
+              height:
+                  (size.maxWidth / (this.widget.maxScore + 1)).roundToDouble(),
               child: Stack(
                 children: <Widget>[
                   Row(
