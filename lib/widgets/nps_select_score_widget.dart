@@ -28,6 +28,28 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
     _currentScore = this.widget.score;
   }
 
+  List<Widget> _numbers() {
+    List<Widget> numbers = List<Widget>();
+
+    for (var i = 0; i <= 10; i++) {
+      numbers.add(
+        Expanded(
+          child: Container(
+            child: Center(
+              child: Text(
+                i.toString(),
+                style: TextStyle(color: i == _currentScore ? Colors.blueGrey : Colors.black),
+              ),
+            ),
+            color: Colors.transparent,
+          ),
+        ),
+      );
+    }
+
+    return numbers;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +73,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: 5,
         ),
         Text(
           "How likely are you to recommaned the XXX app to a ferind or colleague?",
@@ -59,6 +81,12 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
         ),
         SizedBox(
           height: 10,
+        ),
+        Row(
+          children: _numbers(),
+        ),
+        SizedBox(
+          height: 5,
         ),
         ScoreSlider(
           maxScore: 10,
