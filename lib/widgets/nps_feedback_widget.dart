@@ -3,20 +3,22 @@ import 'package:flutter_net_promoter_score/model/promoter_type.dart';
 
 class NpsFeedbackWidget extends StatefulWidget {
   final String feedbackText;
+  final VoidCallback onClosePressed;
   final VoidCallback onEditScoreButtonPressed;
   final VoidCallback onSendButtonPressed;
   final PromoterType promoterType;
 
   final Function(String feedbackText) onFeedbackTextChanged;
 
-  NpsFeedbackWidget({
-    Key key,
-    this.onEditScoreButtonPressed,
-    this.onSendButtonPressed,
-    this.onFeedbackTextChanged,
-    this.feedbackText,
-    this.promoterType
-  }) : super(key: key);
+  NpsFeedbackWidget(
+      {Key key,
+      this.onEditScoreButtonPressed,
+      this.onClosePressed,
+      this.onSendButtonPressed,
+      this.onFeedbackTextChanged,
+      this.feedbackText,
+      this.promoterType})
+      : super(key: key);
 
   @override
   NpsFeedbackWidgetState createState() => new NpsFeedbackWidgetState();
@@ -36,11 +38,10 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
     this.widget.onFeedbackTextChanged(_feedbackTextFieldController.text);
   }
 
-  String _hintTextForFeedbackTextField(){
-    String hintText = "Let us know if there's anything you want to share with us";
-    if (this.widget.promoterType != null) {
-
-    }
+  String _hintTextForFeedbackTextField() {
+    String hintText =
+        "Let us know if there's anything you want to share with us";
+    if (this.widget.promoterType != null) {}
     return hintText;
   }
 
@@ -72,6 +73,28 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  new SizedBox(
+                    height: 18.0,
+                    width: 18.0,
+                    child: new IconButton(
+                        padding: new EdgeInsets.all(0.0),
+                        icon: new Icon(Icons.clear, size: 18.0),
+                        onPressed: () {
+                          if (this.widget.onClosePressed != null){
+                            this.widget.onClosePressed();
+                          }
+                        }),
+                  )
+                ],
+              ),
+            ],
+          ),
           SizedBox(
             height: 10,
           ),

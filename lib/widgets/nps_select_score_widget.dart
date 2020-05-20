@@ -3,12 +3,14 @@ import 'package:flutter_net_promoter_score/widgets/score_slider.dart';
 
 class NpsSelectScoreWidget extends StatefulWidget {
   final int score;
+  final VoidCallback onClosePressed;
   final VoidCallback onSendButtonPressed;
   final void Function(int score) onScoreChanged;
 
   NpsSelectScoreWidget({
     Key key,
     this.onSendButtonPressed,
+    this.onClosePressed,
     this.onScoreChanged,
     this.score,
   }) : super(key: key);
@@ -31,6 +33,23 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            new SizedBox(
+              height: 18.0,
+              width: 18.0,
+              child: new IconButton(
+                  padding: new EdgeInsets.all(0.0),
+                  icon: new Icon(Icons.clear, size: 18.0),
+                  onPressed: () {
+                    if (this.widget.onClosePressed != null) {
+                      this.widget.onClosePressed();
+                    }
+                  }),
+            )
+          ],
+        ),
         SizedBox(
           height: 10,
         ),

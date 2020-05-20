@@ -17,7 +17,7 @@ class ScoreSlider extends StatefulWidget {
     this.score,
     this.onScorChanged,
     this.height = 30,
-    this.thumbColor = Colors.white,
+    this.thumbColor = Colors.blueGrey,
     this.scoreDotColor = Colors.white,
     this.backgroundColor = Colors.black,
   })  : assert(maxScore != null),
@@ -39,25 +39,23 @@ class ScoreSliderState extends State<ScoreSlider> {
   List<Widget> _dots(BoxConstraints size) {
     List<Widget> dots = List<Widget>();
 
-    double width = size.maxWidth / (this.widget.maxScore - this.widget.minScore + 1);
-    double selectedScoreWidth = this.widget.height * 0.75;
-    double dotWidth = this.widget.height * 0.25;
+    double width =
+        size.maxWidth / (this.widget.maxScore - this.widget.minScore + 1);
+    double selectedScoreRadius = (this.widget.height * 0.7) / 2;
+    double dotRadius = (this.widget.height * 0.25) / 2;
 
     for (var i = this.widget.minScore; i <= this.widget.maxScore; i++) {
-      
-      double currentWidth = i == _currentScore ? selectedScoreWidth : dotWidth;
+      double currentRadius =
+          i == _currentScore ? selectedScoreRadius : dotRadius;
       dots.add(
         Container(
           width: width,
           child: Center(
-            child: SizedBox(
-              width: currentWidth,
-              height: currentWidth,
-              child: CircleAvatar(
-                backgroundColor: i == _currentScore
-                    ? this.widget.thumbColor
-                    : this.widget.scoreDotColor,
-              ),
+            child: CircleAvatar(
+              backgroundColor: i == _currentScore
+                  ? this.widget.thumbColor
+                  : this.widget.scoreDotColor,
+              radius: currentRadius,
             ),
           ),
           color: Colors.transparent,
@@ -69,7 +67,8 @@ class ScoreSliderState extends State<ScoreSlider> {
   }
 
   void _handlePanGesture(BoxConstraints size, Offset localPosition) {
-    double socreWidth = size.maxWidth / (this.widget.maxScore - this.widget.minScore + 1);
+    double socreWidth =
+        size.maxWidth / (this.widget.maxScore - this.widget.minScore + 1);
     double x = localPosition.dx;
     int calculatedScore = (x ~/ socreWidth) + this.widget.minScore;
     if (calculatedScore != _currentScore &&

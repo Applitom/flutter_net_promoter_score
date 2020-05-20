@@ -19,8 +19,22 @@ Future<T> showNetPromoterScore<T>(
       context: context,
       builder: (context) {
         return FlutterNetPromoterScore(
-          onClosePressed: onClosePressed,
-          onSurveyCompleted: onSurveyCompleted,
+          onClosePressed: () {
+            Navigator.pop(context);
+            if (onClosePressed != null) {
+              onClosePressed();
+            }
+          },
+          onSurveyCompleted: (NetPromoterScoreResult result) {
+            // Dismiss after delay
+            Future.delayed(const Duration(milliseconds: 2000), () {
+              Navigator.pop(context);
+
+              if (onSurveyCompleted != null) {
+                onSurveyCompleted(result);
+              }
+            });
+          },
         );
       });
 }
@@ -68,15 +82,15 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
         setState(() => _currentPage = NpsSurveyPage.thankYou);
 
         _finilizeResult();
-
-        // Dismiss after delay
-        Future.delayed(const Duration(milliseconds: 2000), () {
-          Navigator.pop(context);
-        });
       },
       onFeedbackTextChanged: (String feedbackText) {
         print("New feedback text is $feedbackText");
         _currentFeedbackText = feedbackText;
+      },
+      onClosePressed: () {
+        if (this.widget.onClosePressed != null) {
+          this.widget.onClosePressed();
+        }
       },
       feedbackText: _currentFeedbackText,
     );
@@ -90,6 +104,11 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
       onScoreChanged: (int score) {
         print("New score is $score");
         _currentScore = score;
+      },
+      onClosePressed: () {
+        if (this.widget.onClosePressed != null) {
+          this.widget.onClosePressed();
+        }
       },
       score: _currentScore,
     );
