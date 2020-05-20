@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_net_promoter_score/widgets/score_slider.dart';
-
+import 'package:flutter_net_promoter_score/model/promoter_type.dart';
 class NpsSelectScoreWidget extends StatefulWidget {
   final int score;
   final VoidCallback onClosePressed;
@@ -38,7 +38,8 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             child: Center(
               child: Text(
                 i.toString(),
-                style: TextStyle(color: i == _currentScore ? Colors.blueGrey : Colors.black),
+                style: TextStyle(
+                    color: i == _currentScore ? Colors.blueGrey : Colors.black),
               ),
             ),
             color: Colors.transparent,
@@ -73,11 +74,12 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           ],
         ),
         SizedBox(
-          height: 5,
+          height: 10,
         ),
         Text(
           "How likely are you to recommaned the XXX app to a ferind or colleague?",
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          textAlign: TextAlign.center,
         ),
         SizedBox(
           height: 10,
@@ -96,6 +98,37 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             setState(() => _currentScore = newScore);
             this.widget.onScoreChanged(_currentScore);
           },
+        ),
+        SizedBox(
+          height: 2,
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                child: Text(
+                  "Not likely",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: _currentScore.toPromoterType() == PromoterType.detractor ? Colors.blueGrey : Colors.black,
+                  ),
+                ),
+                alignment: Alignment.centerLeft,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Text(
+                  "Very likely",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: _currentScore.toPromoterType() == PromoterType.promoter ? Colors.blueGrey : Colors.black,
+                  ),
+                ),
+                alignment: Alignment.centerRight,
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: 10,
