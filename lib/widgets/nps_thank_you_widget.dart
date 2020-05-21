@@ -11,7 +11,11 @@ class NpsThankYouWidgetState extends State<NpsThankYouWidget> {
     return  Column(
       mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text("NpsThankYouWidget")
+          SizedBox(height: 5,),
+          Icon(Icons.done,size: 80,),
+          SizedBox(height: 5,),
+          Text("Thanks for your feedback"),
+          SizedBox(height: 10,),
         ],
     );
   }

@@ -86,7 +86,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                         padding: new EdgeInsets.all(0.0),
                         icon: new Icon(Icons.clear, size: 18.0),
                         onPressed: () {
-                          if (this.widget.onClosePressed != null){
+                          if (this.widget.onClosePressed != null) {
                             this.widget.onClosePressed();
                           }
                         }),
@@ -107,12 +107,17 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
             height: 10,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               MaterialButton(
                 onPressed: () {
                   this.widget.onEditScoreButtonPressed();
                 },
                 child: Text("Edit score"),
+              ),
+              SizedBox(
+                width: 10,
               ),
               MaterialButton(
                 onPressed: () {

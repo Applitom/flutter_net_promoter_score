@@ -39,6 +39,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
               child: Text(
                 i.toString(),
                 style: TextStyle(
+                    fontWeight: i == _currentScore ? FontWeight.bold : FontWeight.normal,
                     color: i == _currentScore ? Colors.blueGrey : Colors.black),
               ),
             ),
