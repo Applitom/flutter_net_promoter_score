@@ -12,9 +12,12 @@ class NpsThankYouWidgetState extends State<NpsThankYouWidget> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          SizedBox(
+          Row(children: <Widget>[
+            SizedBox(
             height: 5,
           ),
+          ],),
+          
           Icon(
             Icons.done,
             size: 80,
@@ -34,7 +37,7 @@ class NpsThankYouWidgetState extends State<NpsThankYouWidget> {
       ),
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
-      ),      
+      ),
     );
   }
 }

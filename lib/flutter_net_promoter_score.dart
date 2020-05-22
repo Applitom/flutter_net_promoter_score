@@ -134,20 +134,32 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
             bottom: MediaQuery.of(context).viewInsets.bottom,
             left: 0,
             right: 0),
-        child: Card(
-          child: Container(
-            child: _pageBuilders[_currentPage.index](),
-            padding: EdgeInsets.all(10),
-          ),
-          elevation: 5,
-          margin: EdgeInsets.only(
-            right: 5,
-            left: 5,
-            bottom: 5
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
+        child: AnimatedSwitcher(
+          child: _pageBuilders[_currentPage.index](),
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            final outAnimation =
+                Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+                    .animate(animation);
+
+            return SlideTransition(
+              position: outAnimation,
+              child: Padding(
+                padding: EdgeInsets.all(0),
+                child: Card(
+                  child: Container(
+                    child: child,
+                    padding: EdgeInsets.all(10),
+                  ),
+                  elevation: 5,
+                  margin: EdgeInsets.only(right: 5, left: 5, bottom: 5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
