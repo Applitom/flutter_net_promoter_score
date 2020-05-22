@@ -14,6 +14,7 @@ Future<T> showNetPromoterScore<T>(
     VoidCallback onClosePressed,
     Function(NetPromoterScoreResult result) onSurveyCompleted}) {
   return showModalBottomSheet(
+      backgroundColor: Colors.transparent,
       isDismissible: false,
       isScrollControlled: true,
       context: context,
@@ -130,26 +131,22 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: Container(
-          child: AnimatedSwitcher(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 0,
+            right: 0),
+        child: Card(
+          child: Container(
             child: _pageBuilders[_currentPage.index](),
-            duration: const Duration(milliseconds: 400),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              final outAnimation =
-                  Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
-                      .animate(animation);
-              return ClipRect(
-                child: SlideTransition(
-                  position: outAnimation,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: child,
-                  ),
-                ),
-              );
-            },
+            padding: EdgeInsets.all(10),
+          ),
+          elevation: 5,
+          margin: EdgeInsets.only(
+            right: 5,
+            left: 5,
+            bottom: 5
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
           ),
         ),
       ),

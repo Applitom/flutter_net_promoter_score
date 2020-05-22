@@ -8,15 +8,33 @@ class NpsThankYouWidget extends StatefulWidget {
 class NpsThankYouWidgetState extends State<NpsThankYouWidget> {
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      mainAxisSize: MainAxisSize.min,
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          SizedBox(height: 5,),
-          Icon(Icons.done,size: 80,),
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
+          Icon(
+            Icons.done,
+            size: 80,
+          ),
+          SizedBox(
+            height: 5,
+          ),
           Text("Thanks for your feedback"),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
         ],
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 10,
+      ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),      
     );
   }
 }
