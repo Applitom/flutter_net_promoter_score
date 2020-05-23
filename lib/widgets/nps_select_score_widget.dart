@@ -9,10 +9,10 @@ class NpsSelectScoreWidget extends StatefulWidget {
   final VoidCallback onSendButtonPressed;
   final void Function(int score) onScoreChanged;
   final NpsSelectScorePageTexts texts;
-  
+
   NpsSelectScoreWidget({
     Key key,
-    @required this.texts, 
+    @required this.texts,
     this.onSendButtonPressed,
     this.onClosePressed,
     this.onScoreChanged,
@@ -43,7 +43,9 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
               child: Text(
                 i.toString(),
                 style: TextStyle(
-                    fontWeight: i == _currentScore ? FontWeight.bold : FontWeight.normal,
+                    fontWeight: i == _currentScore
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                     color: i == _currentScore ? Colors.blueGrey : Colors.black),
               ),
             ),
@@ -65,11 +67,14 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             new SizedBox(
-              height: 18.0,
-              width: 18.0,
+              height: 22.0,
+              width: 22.0,
               child: new IconButton(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.yellow,
                   padding: new EdgeInsets.all(0.0),
-                  icon: new Icon(Icons.clear, size: 18.0),
+                  icon: new Icon(Icons.close, size: 22.0),
                   onPressed: () {
                     if (this.widget.onClosePressed != null) {
                       this.widget.onClosePressed();
@@ -115,7 +120,10 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                   this.widget.texts.detractorScoreLabelText,
                   style: TextStyle(
                     fontSize: 12,
-                    color: _currentScore.toPromoterType() == PromoterType.detractor ? Colors.blueGrey : Colors.black,
+                    color:
+                        _currentScore.toPromoterType() == PromoterType.detractor
+                            ? Colors.blueGrey
+                            : Colors.black,
                   ),
                 ),
                 alignment: Alignment.centerLeft,
@@ -127,7 +135,10 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                   this.widget.texts.promoterScoreLabelText,
                   style: TextStyle(
                     fontSize: 12,
-                    color: _currentScore.toPromoterType() == PromoterType.promoter ? Colors.blueGrey : Colors.black,
+                    color:
+                        _currentScore.toPromoterType() == PromoterType.promoter
+                            ? Colors.blueGrey
+                            : Colors.black,
                   ),
                 ),
                 alignment: Alignment.centerRight,

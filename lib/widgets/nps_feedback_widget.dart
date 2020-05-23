@@ -117,11 +117,13 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     new SizedBox(
-                      height: 18.0,
-                      width: 18.0,
+                      height: 22.0,
+                      width: 22.0,
                       child: new IconButton(
+                          splashColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           padding: new EdgeInsets.all(0.0),
-                          icon: new Icon(Icons.clear, size: 18.0),
+                          icon: new Icon(Icons.clear, size: 22.0),
                           onPressed: () {
                             if (this.widget.onClosePressed != null) {
                               this.widget.onClosePressed();
@@ -168,7 +170,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
           ],
         ),
       ),
-      onTap: (){
+      onTap: () {
         // Dismiss the keyboard when tapping outside of the text field
         FocusScope.of(context).requestFocus(new FocusNode());
       },
