@@ -46,7 +46,8 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
     if (this.widget.promoterType != null) {
       switch (this.widget.promoterType) {
         case PromoterType.detractor:
-          hintText = this.widget.texts.detractorFeedbackTextFieldPlaceholderText;
+          hintText =
+              this.widget.texts.detractorFeedbackTextFieldPlaceholderText;
           break;
         case PromoterType.passive:
           hintText = this.widget.texts.passiveFeedbackTextFieldPlaceholderText;
@@ -104,67 +105,73 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
       ),
     );
 
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  new SizedBox(
-                    height: 18.0,
-                    width: 18.0,
-                    child: new IconButton(
-                        padding: new EdgeInsets.all(0.0),
-                        icon: new Icon(Icons.clear, size: 18.0),
-                        onPressed: () {
-                          if (this.widget.onClosePressed != null) {
-                            this.widget.onClosePressed();
-                          }
-                        }),
-                  )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(_mainTextAccordingToPromoterType()),
-          SizedBox(
-            height: 10,
-          ),
-          feedbackTextField,
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              MaterialButton(
-                onPressed: () {
-                  this.widget.onEditScoreButtonPressed();
-                },
-                child: Text(this.widget.texts.editScoreButtonText),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              MaterialButton(
-                onPressed: () {
-                  this.widget.onSendButtonPressed();
-                },
-                child: Text(this.widget.texts.submitButtonText),
-                color: Colors.grey,
-              ),
-            ],
-          )
-        ],
+    return GestureDetector(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    new SizedBox(
+                      height: 18.0,
+                      width: 18.0,
+                      child: new IconButton(
+                          padding: new EdgeInsets.all(0.0),
+                          icon: new Icon(Icons.clear, size: 18.0),
+                          onPressed: () {
+                            if (this.widget.onClosePressed != null) {
+                              this.widget.onClosePressed();
+                            }
+                          }),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(_mainTextAccordingToPromoterType()),
+            SizedBox(
+              height: 10,
+            ),
+            feedbackTextField,
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                MaterialButton(
+                  onPressed: () {
+                    this.widget.onEditScoreButtonPressed();
+                  },
+                  child: Text(this.widget.texts.editScoreButtonText),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                MaterialButton(
+                  onPressed: () {
+                    this.widget.onSendButtonPressed();
+                  },
+                  child: Text(this.widget.texts.submitButtonText),
+                  color: Colors.grey,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
+      onTap: (){
+        // Dismiss the keyboard when tapping outside of the text field
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
     );
   }
 }
