@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
 import 'package:flutter_net_promoter_score/model/promoter_type.dart';
 
 class NpsFeedbackWidget extends StatefulWidget {
@@ -7,18 +8,20 @@ class NpsFeedbackWidget extends StatefulWidget {
   final VoidCallback onEditScoreButtonPressed;
   final VoidCallback onSendButtonPressed;
   final PromoterType promoterType;
-
   final Function(String feedbackText) onFeedbackTextChanged;
+  final NpsFeedbackPageTexts texts;
 
-  NpsFeedbackWidget(
-      {Key key,
-      this.onEditScoreButtonPressed,
-      this.onClosePressed,
-      this.onSendButtonPressed,
-      this.onFeedbackTextChanged,
-      this.feedbackText,
-      this.promoterType})
-      : super(key: key);
+  NpsFeedbackWidget({
+    Key key,
+    @required this.texts,
+    this.onEditScoreButtonPressed,
+    this.onClosePressed,
+    this.onSendButtonPressed,
+    this.onFeedbackTextChanged,
+    this.feedbackText,
+    this.promoterType,
+  })  : assert(texts != null),
+        super(key: key);
 
   @override
   NpsFeedbackWidgetState createState() => new NpsFeedbackWidgetState();
@@ -39,10 +42,42 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
   }
 
   String _hintTextForFeedbackTextField() {
-    String hintText =
-        "Let us know if there's anything you want to share with us";
-    if (this.widget.promoterType != null) {}
+    String hintText = this.widget.texts.passiveFeedbackTextFieldPlaceholderText;
+    if (this.widget.promoterType != null) {
+      switch (this.widget.promoterType) {
+        case PromoterType.detractor:
+          hintText = this.widget.texts.detractorFeedbackTextFieldPlaceholderText;
+          break;
+        case PromoterType.passive:
+          hintText = this.widget.texts.passiveFeedbackTextFieldPlaceholderText;
+          break;
+        case PromoterType.promoter:
+          hintText = this.widget.texts.promoterFeedbackTextFieldPlaceholderText;
+          break;
+        default:
+          hintText = this.widget.texts.passiveFeedbackTextFieldPlaceholderText;
+      }
+    }
     return hintText;
+  }
+
+  String _mainTextAccordingToPromoterType() {
+    String mainText = this.widget.texts.passiveMainLabelText;
+    switch (this.widget.promoterType) {
+      case PromoterType.detractor:
+        mainText = this.widget.texts.detractorMainLabelText;
+        break;
+      case PromoterType.passive:
+        mainText = this.widget.texts.passiveMainLabelText;
+        break;
+      case PromoterType.promoter:
+        mainText = this.widget.texts.promoterMainLabelText;
+        break;
+
+      default:
+        mainText = this.widget.texts.passiveMainLabelText;
+    }
+    return mainText;
   }
 
   @override
@@ -98,7 +133,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
           SizedBox(
             height: 10,
           ),
-          Text("Thanks for your feedback!"),
+          Text(_mainTextAccordingToPromoterType()),
           SizedBox(
             height: 10,
           ),
@@ -114,7 +149,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                 onPressed: () {
                   this.widget.onEditScoreButtonPressed();
                 },
-                child: Text("Edit score"),
+                child: Text(this.widget.texts.editScoreButtonText),
               ),
               SizedBox(
                 width: 10,
@@ -123,7 +158,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                 onPressed: () {
                   this.widget.onSendButtonPressed();
                 },
-                child: Text("SEND"),
+                child: Text(this.widget.texts.submitButtonText),
                 color: Colors.grey,
               ),
             ],

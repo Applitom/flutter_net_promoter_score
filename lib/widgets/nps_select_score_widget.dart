@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
 import 'package:flutter_net_promoter_score/widgets/score_slider.dart';
 import 'package:flutter_net_promoter_score/model/promoter_type.dart';
+
 class NpsSelectScoreWidget extends StatefulWidget {
   final int score;
   final VoidCallback onClosePressed;
   final VoidCallback onSendButtonPressed;
   final void Function(int score) onScoreChanged;
-
+  final NpsSelectScorePageTexts texts;
+  
   NpsSelectScoreWidget({
     Key key,
+    @required this.texts, 
     this.onSendButtonPressed,
     this.onClosePressed,
     this.onScoreChanged,
@@ -78,7 +82,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           height: 10,
         ),
         Text(
-          "How likely are you to recommaned the XXX app to a ferind or colleague?",
+          this.widget.texts.surveyQuestionText,
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
@@ -108,7 +112,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             Expanded(
               child: Container(
                 child: Text(
-                  "Not likely",
+                  this.widget.texts.detractorScoreLabelText,
                   style: TextStyle(
                     fontSize: 12,
                     color: _currentScore.toPromoterType() == PromoterType.detractor ? Colors.blueGrey : Colors.black,
@@ -120,7 +124,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             Expanded(
               child: Container(
                 child: Text(
-                  "Very likely",
+                  this.widget.texts.promoterScoreLabelText,
                   style: TextStyle(
                     fontSize: 12,
                     color: _currentScore.toPromoterType() == PromoterType.promoter ? Colors.blueGrey : Colors.black,
@@ -140,7 +144,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
               this.widget.onSendButtonPressed();
             }
           },
-          child: Text("SEND"),
+          child: Text(this.widget.texts.submitButtonText),
           color: Colors.grey,
         )
       ],

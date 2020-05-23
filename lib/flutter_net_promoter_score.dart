@@ -1,6 +1,7 @@
 library flutter_net_promoter_score;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
 import 'package:flutter_net_promoter_score/widgets/nps_feedback_widget.dart';
 import 'package:flutter_net_promoter_score/widgets/nps_select_score_widget.dart';
 import 'package:flutter_net_promoter_score/widgets/nps_thank_you_widget.dart';
@@ -9,10 +10,15 @@ import 'model/net_promoter_score_result.dart';
 import 'model/nps_survey_page.dart';
 
 /// Show a modal Net Promoter Score as a material design bottom sheet.
-Future<T> showNetPromoterScore<T>(
-    {@required BuildContext context,
-    VoidCallback onClosePressed,
-    Function(NetPromoterScoreResult result) onSurveyCompleted}) {
+Future<T> showNetPromoterScore<T>({
+  @required BuildContext context,
+  VoidCallback onClosePressed,
+  Function(NetPromoterScoreResult result) onSurveyCompleted,
+  NpsSurveyTexts texts = const NpsSurveyTexts(),
+}) {
+  
+  assert(texts != null);
+
   return showModalBottomSheet(
       backgroundColor: Colors.transparent,
       isDismissible: false,
@@ -36,15 +42,21 @@ Future<T> showNetPromoterScore<T>(
               }
             });
           },
+          texts: texts,
         );
       });
 }
 
 class FlutterNetPromoterScore extends StatefulWidget {
+  final NpsSurveyTexts texts;
   final VoidCallback onClosePressed;
   final void Function(NetPromoterScoreResult result) onSurveyCompleted;
 
-  FlutterNetPromoterScore({this.onSurveyCompleted, this.onClosePressed});
+  FlutterNetPromoterScore({
+    this.onSurveyCompleted,
+    this.onClosePressed,
+    this.texts = const NpsSurveyTexts(),
+  }) : assert(texts != null);
 
   @override
   FlutterNetPromoterScoreState createState() => FlutterNetPromoterScoreState();
@@ -71,7 +83,9 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   }
 
   Widget _npsThankYouWidgetBuilder() {
-    return NpsThankYouWidget();
+    return NpsThankYouWidget(
+      texts: this.widget.texts.thankYouPageTexts,
+    );
   }
 
   Widget _npsFeedbackWidgetBuilder() {
@@ -94,6 +108,8 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
         }
       },
       feedbackText: _currentFeedbackText,
+      texts: this.widget.texts.feedbackPageTexts,
+      promoterType: _currentScore.toPromoterType(),
     );
   }
 
@@ -112,6 +128,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
         }
       },
       score: _currentScore,
+      texts: this.widget.texts.selectScorePageTexts,
     );
   }
 

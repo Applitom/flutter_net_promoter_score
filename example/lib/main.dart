@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_net_promoter_score/flutter_net_promoter_score.dart';
+import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,12 +36,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer.run(() { _showNPS(); });
+    Timer.run(() {
+      _showNPS();
+    });
   }
 
   void _showNPS() {
     showNetPromoterScore(
       context: context,
+      texts: NpsSurveyTexts(
+        selectScorePageTexts: NpsSelectScorePageTexts(
+          surveyQuestionText:
+              "How likely are you to recommend flutter_net_promoter_score to a friend or colleague?",
+        ),
+      ),
       onSurveyCompleted: (result) {
         print("NPS Completed");
         print("Score: ${result.score}");
