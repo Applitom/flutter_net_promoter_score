@@ -16,35 +16,50 @@ Future<T> showNetPromoterScore<T>({
   Function(NetPromoterScoreResult result) onSurveyCompleted,
   NpsSurveyTexts texts = const NpsSurveyTexts(),
 }) {
-  
   assert(texts != null);
 
-  return showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      isDismissible: false,
-      isScrollControlled: true,
-      context: context,
-      builder: (context) {
-        return FlutterNetPromoterScore(
-          onClosePressed: () {
-            Navigator.pop(context);
-            if (onClosePressed != null) {
-              onClosePressed();
-            }
-          },
-          onSurveyCompleted: (NetPromoterScoreResult result) {
-            // Dismiss after delay
-            Future.delayed(const Duration(milliseconds: 2000), () {
-              Navigator.pop(context);
+  bool currentlyShowingSurvey = true;
 
-              if (onSurveyCompleted != null) {
-                onSurveyCompleted(result);
+  Future<T> future = showModalBottomSheet(
+    backgroundColor: Colors.transparent,
+    isDismissible: false,
+    isScrollControlled: true,
+    context: context,
+    builder: (context) {
+      return FlutterNetPromoterScore(
+        onClosePressed: () {
+          Navigator.pop(context);
+          if (onClosePressed != null) {
+            onClosePressed();
+          }
+        },
+        onSurveyCompleted: (NetPromoterScoreResult result) {
+          // call survey completion block
+          if (onSurveyCompleted != null) {
+            onSurveyCompleted(result);
+          }
+
+          // Dismiss after delay
+          Future.delayed(
+            const Duration(milliseconds: 2000),
+            () {
+              // Check if the user didn't dismiss the modal view manually by him self
+              if (currentlyShowingSurvey) {
+                Navigator.pop(context);
               }
-            });
-          },
-          texts: texts,
-        );
-      });
+            },
+          );
+        },
+        texts: texts,
+      );
+    },
+  );
+
+  future.then((value) {
+    currentlyShowingSurvey = false;
+  });
+
+  return future;
 }
 
 class FlutterNetPromoterScore extends StatefulWidget {
@@ -165,6 +180,9 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
                 padding: EdgeInsets.all(0),
                 child: Card(
                   child: Container(
+                    constraints: BoxConstraints(
+                      maxWidth: 680,
+                    ),
                     child: child,
                     padding: EdgeInsets.all(10),
                   ),
