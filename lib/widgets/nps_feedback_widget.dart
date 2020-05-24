@@ -143,7 +143,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
             ),
             feedbackTextField,
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -154,6 +154,8 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                     this.widget.onEditScoreButtonPressed();
                   },
                   child: Text(this.widget.texts.editScoreButtonText),
+                  minWidth: 150,
+                  height: 45,
                 ),
                 SizedBox(
                   width: 10,
@@ -164,6 +166,8 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                   },
                   child: Text(this.widget.texts.submitButtonText),
                   color: Colors.grey,
+                  minWidth: 150,
+                  height: 45,
                 ),
               ],
             )
