@@ -92,7 +92,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           textAlign: TextAlign.center,
         ),
         SizedBox(
-          height: 10,
+          height: 30,
         ),
         Row(
           children: _numbers(),
@@ -103,6 +103,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
         ScoreSlider(
           maxScore: 10,
           minScore: 0,
+          height: 35,
           score: _currentScore,
           onScorChanged: (int newScore) {
             setState(() => _currentScore = newScore);
@@ -147,7 +148,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: 20,
         ),
         MaterialButton(
           onPressed: () {
@@ -157,7 +158,12 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           },
           child: Text(this.widget.texts.submitButtonText),
           color: Colors.grey,
-        )
+          minWidth: 150,
+          height: 45,
+        ),
+        SizedBox(
+          height: 10,
+        ),        
       ],
     );
   }
