@@ -150,20 +150,23 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
         SizedBox(
           height: 20,
         ),
-        MaterialButton(
-          onPressed: () {
-            if (this._currentScore != null) {
-              this.widget.onSendButtonPressed();
-            }
-          },
-          child: Text(this.widget.texts.submitButtonText),
-          color: Colors.grey,
+        ButtonTheme(
           minWidth: 150,
           height: 45,
+          child: RaisedButton(
+            onPressed: this._currentScore == null // Enable the button only if the user selected score
+                ? null
+                : () {
+                      this.widget.onSendButtonPressed();
+                  },
+            child: Text(this.widget.texts.submitButtonText),
+            color: Colors.grey,
+            splashColor: Colors.transparent,
+          ),
         ),
         SizedBox(
           height: 10,
-        ),        
+        ),
       ],
     );
   }

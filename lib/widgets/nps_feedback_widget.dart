@@ -156,6 +156,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                   child: Text(this.widget.texts.editScoreButtonText),
                   minWidth: 150,
                   height: 45,
+                  splashColor: Colors.transparent,
                 ),
                 SizedBox(
                   width: 10,
@@ -168,6 +169,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                   color: Colors.grey,
                   minWidth: 150,
                   height: 45,
+                  splashColor: Colors.transparent,
                 ),
               ],
             )
