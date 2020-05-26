@@ -137,9 +137,13 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
             SizedBox(
               height: 10,
             ),
-            Text(_mainTextAccordingToPromoterType()),
+            Text(
+              _mainTextAccordingToPromoterType(),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+              textAlign: TextAlign.center,
+            ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             feedbackTextField,
             SizedBox(
