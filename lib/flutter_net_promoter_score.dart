@@ -12,6 +12,7 @@ import 'model/nps_survey_page.dart';
 /// Show a modal Net Promoter Score as a material design bottom sheet.
 Future<T> showNetPromoterScore<T>({
   @required BuildContext context,
+  ThemeData theme,
   VoidCallback onClosePressed,
   Function(int newScore) onScoreChanged,
   Function(String newFeedback) onFeedbackChanged,
@@ -55,6 +56,7 @@ Future<T> showNetPromoterScore<T>({
         onScoreChanged: onScoreChanged,
         onFeedbackChanged: onFeedbackChanged,
         texts: texts,
+        theme: theme == null ? Theme.of(context) : theme,
       );
     },
   );
@@ -72,12 +74,14 @@ class FlutterNetPromoterScore extends StatefulWidget {
   final void Function(NetPromoterScoreResult result) onSurveyCompleted;
   final Function(int newScore) onScoreChanged;
   final Function(String newFeedback) onFeedbackChanged;
+  final ThemeData theme;
 
   FlutterNetPromoterScore({
     this.onSurveyCompleted,
     this.onClosePressed,
     this.onScoreChanged,
     this.onFeedbackChanged,
+    this.theme,
     this.texts = const NpsSurveyTexts(),
   }) : assert(texts != null);
 
@@ -173,41 +177,44 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-            left: 0,
-            right: 0),
-        child: AnimatedSwitcher(
-          child: _pageBuilders[_currentPage.index](),
-          duration: const Duration(milliseconds: 300),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            final outAnimation =
-                Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
-                    .animate(animation);
+    return Theme(
+      data: this.widget.theme == null ? Theme.of(context) : this.widget.theme,
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              left: 0,
+              right: 0),
+          child: AnimatedSwitcher(
+            child: _pageBuilders[_currentPage.index](),
+            duration: const Duration(milliseconds: 300),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              final outAnimation =
+                  Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))
+                      .animate(animation);
 
-            return SlideTransition(
-              position: outAnimation,
-              child: Padding(
-                padding: EdgeInsets.all(0),
-                child: Card(
-                  child: Container(
-                    constraints: BoxConstraints(
-                      maxWidth: 680,
+              return SlideTransition(
+                position: outAnimation,
+                child: Padding(
+                  padding: EdgeInsets.all(0),
+                  child: Card(
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: 680,
+                      ),
+                      child: child,
+                      padding: EdgeInsets.all(10),
                     ),
-                    child: child,
-                    padding: EdgeInsets.all(10),
-                  ),
-                  elevation: 5,
-                  margin: EdgeInsets.only(right: 5, left: 5, bottom: 5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+                    elevation: 5,
+                    margin: EdgeInsets.only(right: 5, left: 5, bottom: 5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

@@ -123,8 +123,8 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                     fontSize: 12,
                     color:
                         _currentScore.toPromoterType() == PromoterType.detractor
-                            ? Colors.blueGrey
-                            : Colors.black,
+                            ? Theme.of(context).indicatorColor
+                            : Theme.of(context).textTheme.caption.color
                   ),
                 ),
                 alignment: Alignment.centerLeft,
@@ -138,8 +138,8 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                     fontSize: 12,
                     color:
                         _currentScore.toPromoterType() == PromoterType.promoter
-                            ? Colors.blueGrey
-                            : Colors.black,
+                            ? Theme.of(context).indicatorColor
+                            : Theme.of(context).textTheme.caption.color
                   ),
                 ),
                 alignment: Alignment.centerRight,
