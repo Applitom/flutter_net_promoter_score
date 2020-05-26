@@ -56,6 +56,15 @@ class _MyHomePageState extends State<MyHomePage> {
         print("Feedback: ${result.feedback}");
         print("Promoter Type: ${result.promoterType}");
       },
+      onClosePressed: (){
+        print("User closed the survery");
+      },
+      onScoreChanged: (newScore) {
+        print("User changed the score to $newScore");
+      },
+      onFeedbackChanged: (newFeedback) {
+        print("User change the feedback to $newFeedback");
+      }
     );
   }
 
