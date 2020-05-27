@@ -18,6 +18,7 @@ Future<T> showNetPromoterScore<T>({
   Function(String newFeedback) onFeedbackChanged,
   Function(NetPromoterScoreResult result) onSurveyCompleted,
   NpsSurveyTexts texts = const NpsSurveyTexts(),
+  Widget thankYouIcon,
 }) {
   assert(texts != null);
 
@@ -57,6 +58,7 @@ Future<T> showNetPromoterScore<T>({
         onFeedbackChanged: onFeedbackChanged,
         texts: texts,
         theme: theme == null ? Theme.of(context) : theme,
+        thankYouIcon: thankYouIcon,
       );
     },
   );
@@ -75,6 +77,7 @@ class FlutterNetPromoterScore extends StatefulWidget {
   final Function(int newScore) onScoreChanged;
   final Function(String newFeedback) onFeedbackChanged;
   final ThemeData theme;
+  final Widget thankYouIcon;
 
   FlutterNetPromoterScore({
     this.onSurveyCompleted,
@@ -83,6 +86,7 @@ class FlutterNetPromoterScore extends StatefulWidget {
     this.onFeedbackChanged,
     this.theme,
     this.texts = const NpsSurveyTexts(),
+    this.thankYouIcon,
   }) : assert(texts != null);
 
   @override
@@ -112,6 +116,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
   Widget _npsThankYouWidgetBuilder() {
     return NpsThankYouWidget(
       texts: this.widget.texts.thankYouPageTexts,
+      thankYouIcon: this.widget.thankYouIcon,
     );
   }
 
@@ -165,7 +170,6 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
 
   void _finilizeResult() {
     if (this.widget.onSurveyCompleted != null) {
-      
       NetPromoterScoreResult finalResult = NetPromoterScoreResult();
       finalResult.score = _currentScore;
       finalResult.feedback = _currentFeedbackText;

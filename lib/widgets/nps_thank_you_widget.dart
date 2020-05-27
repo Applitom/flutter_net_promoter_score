@@ -3,10 +3,12 @@ import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
 
 class NpsThankYouWidget extends StatefulWidget {
   final NpsThankYouPageTexts texts;
+  final Widget thankYouIcon;
 
   NpsThankYouWidget({
     Key key,
     this.texts,
+    this.thankYouIcon,
   })  : assert(texts != null),
         super(key: key);
 
@@ -28,9 +30,16 @@ class NpsThankYouWidgetState extends State<NpsThankYouWidget> {
               ),
             ],
           ),
-          Icon(
-            Icons.done,
-            size: 80,
+          // Icon(Icon.asset("name")),
+          Container(
+            child: FittedBox(
+              child: this.widget.thankYouIcon == null
+                  ? Icon(Icons.done)
+                  : this.widget.thankYouIcon,
+              fit: BoxFit.fill,
+            ),
+            width: 80,
+            height: 80,
           ),
           SizedBox(
             height: 5,

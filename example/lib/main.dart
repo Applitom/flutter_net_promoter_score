@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         print("Feedback: ${result.feedback}");
         print("Promoter Type: ${result.promoterType}");
       },
-      onClosePressed: (){
+      onClosePressed: () {
         print("User closed the survery");
       },
       onScoreChanged: (newScore) {
@@ -64,7 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       onFeedbackChanged: (newFeedback) {
         print("User change the feedback to $newFeedback");
-      }
+      },
+      thankYouIcon: Icon(
+        Icons.mood,
+      ),
     );
   }
 
