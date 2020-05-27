@@ -35,18 +35,21 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
   List<Widget> _numbers() {
     List<Widget> numbers = List<Widget>();
 
-    for (var i = 0; i <= 10; i++) {
+    for (var currentScoreNumber = 0; currentScoreNumber <= 10; currentScoreNumber++) {
       numbers.add(
         Expanded(
           child: Container(
             child: Center(
               child: Text(
-                i.toString(),
+                currentScoreNumber.toString(),
                 style: TextStyle(
-                    fontWeight: i == _currentScore
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                    color: i == _currentScore ? Colors.blueGrey : Colors.black),
+                  fontWeight: currentScoreNumber == _currentScore
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  color: currentScoreNumber == _currentScore
+                      ? Theme.of(context).indicatorColor
+                      : Theme.of(context).textTheme.bodyText1.color,
+                ),
               ),
             ),
             color: Colors.transparent,
@@ -109,6 +112,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             setState(() => _currentScore = newScore);
             this.widget.onScoreChanged(_currentScore);
           },
+          thumbColor: Theme.of(context).indicatorColor,
         ),
         SizedBox(
           height: 2,
@@ -120,12 +124,11 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                 child: Text(
                   this.widget.texts.detractorScoreLabelText,
                   style: TextStyle(
-                    fontSize: 12,
-                    color:
-                        _currentScore.toPromoterType() == PromoterType.detractor
-                            ? Theme.of(context).indicatorColor
-                            : Theme.of(context).textTheme.caption.color
-                  ),
+                      fontSize: 12,
+                      color: _currentScore.toPromoterType() ==
+                              PromoterType.detractor
+                          ? Theme.of(context).indicatorColor
+                          : Theme.of(context).textTheme.caption.color),
                 ),
                 alignment: Alignment.centerLeft,
               ),
@@ -135,12 +138,11 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                 child: Text(
                   this.widget.texts.promoterScoreLabelText,
                   style: TextStyle(
-                    fontSize: 12,
-                    color:
-                        _currentScore.toPromoterType() == PromoterType.promoter
-                            ? Theme.of(context).indicatorColor
-                            : Theme.of(context).textTheme.caption.color
-                  ),
+                      fontSize: 12,
+                      color: _currentScore.toPromoterType() ==
+                              PromoterType.promoter
+                          ? Theme.of(context).indicatorColor
+                          : Theme.of(context).textTheme.caption.color),
                 ),
                 alignment: Alignment.centerRight,
               ),
@@ -154,10 +156,11 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           minWidth: 150,
           height: 45,
           child: RaisedButton(
-            onPressed: this._currentScore == null // Enable the button only if the user selected score
+            onPressed: this._currentScore ==
+                    null // Enable the button only if the user selected score
                 ? null
                 : () {
-                      this.widget.onSendButtonPressed();
+                    this.widget.onSendButtonPressed();
                   },
             child: Text(this.widget.texts.submitButtonText),
             color: Colors.grey,
