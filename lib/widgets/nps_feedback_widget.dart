@@ -156,6 +156,8 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
               children: <Widget>[
                 MaterialButton(
                   onPressed: () {
+                    // Dismiss keyboard first
+                    FocusScope.of(context).requestFocus(new FocusNode());                    
                     this.widget.onEditScoreButtonPressed();
                   },
                   child: Text(this.widget.texts.editScoreButtonText),
@@ -168,6 +170,8 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                 ),
                 MaterialButton(
                   onPressed: () {
+                    // Dismiss keyboard first
+                    FocusScope.of(context).requestFocus(new FocusNode());
                     this.widget.onSendButtonPressed();
                   },
                   child: Text(this.widget.texts.submitButtonText),
