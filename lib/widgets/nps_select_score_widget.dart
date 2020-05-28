@@ -35,7 +35,9 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
   List<Widget> _numbers() {
     List<Widget> numbers = List<Widget>();
 
-    for (var currentScoreNumber = 0; currentScoreNumber <= 10; currentScoreNumber++) {
+    for (var currentScoreNumber = 0;
+        currentScoreNumber <= 10;
+        currentScoreNumber++) {
       numbers.add(
         Expanded(
           child: Container(
@@ -63,115 +65,117 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            new SizedBox(
-              height: 22.0,
-              width: 22.0,
-              child: new IconButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  padding: new EdgeInsets.all(0.0),
-                  icon: new Icon(Icons.close, size: 22.0),
-                  onPressed: () {
-                    if (this.widget.onClosePressed != null) {
-                      this.widget.onClosePressed();
-                    }
-                  }),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          this.widget.texts.surveyQuestionText,
-          style: Theme.of(context).textTheme.subtitle2,
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(
-          height: 30,
-        ),
-        Row(
-          children: _numbers(),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        ScoreSlider(
-          maxScore: 10,
-          minScore: 0,
-          height: 35,
-          score: _currentScore,
-          onScorChanged: (int newScore) {
-            setState(() => _currentScore = newScore);
-            this.widget.onScoreChanged(_currentScore);
-          },
-          thumbColor: Theme.of(context).indicatorColor,
-          backgroundColor: Theme.of(context).focusColor,
-          scoreDotColor: Theme.of(context).disabledColor,
-        ),
-        SizedBox(
-          height: 2,
-        ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                child: Text(
-                  this.widget.texts.detractorScoreLabelText,
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: _currentScore.toPromoterType() ==
-                              PromoterType.detractor
-                          ? Theme.of(context).indicatorColor
-                          : Theme.of(context).textTheme.caption.color),
-                ),
-                alignment: Alignment.centerLeft,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                child: Text(
-                  this.widget.texts.promoterScoreLabelText,
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: _currentScore.toPromoterType() ==
-                              PromoterType.promoter
-                          ? Theme.of(context).indicatorColor
-                          : Theme.of(context).textTheme.caption.color),
-                ),
-                alignment: Alignment.centerRight,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        ButtonTheme(
-          minWidth: 150,
-          height: 45,
-          child: RaisedButton(
-            onPressed: this._currentScore ==
-                    null // Enable the button only if the user selected score
-                ? null
-                : () {
-                    this.widget.onSendButtonPressed();
-                  },
-            child: Text(this.widget.texts.submitButtonText),
-            color: Theme.of(context).buttonColor,
-            splashColor: Colors.transparent,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              new SizedBox(
+                height: 22.0,
+                width: 22.0,
+                child: new IconButton(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    padding: new EdgeInsets.all(0.0),
+                    icon: new Icon(Icons.close, size: 22.0),
+                    onPressed: () {
+                      if (this.widget.onClosePressed != null) {
+                        this.widget.onClosePressed();
+                      }
+                    }),
+              )
+            ],
           ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-      ],
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            this.widget.texts.surveyQuestionText,
+            style: Theme.of(context).textTheme.subtitle2,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: _numbers(),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          ScoreSlider(
+            maxScore: 10,
+            minScore: 0,
+            height: 35,
+            score: _currentScore,
+            onScorChanged: (int newScore) {
+              setState(() => _currentScore = newScore);
+              this.widget.onScoreChanged(_currentScore);
+            },
+            thumbColor: Theme.of(context).indicatorColor,
+            backgroundColor: Theme.of(context).focusColor,
+            scoreDotColor: Theme.of(context).disabledColor,
+          ),
+          SizedBox(
+            height: 2,
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  child: Text(
+                    this.widget.texts.detractorScoreLabelText,
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: _currentScore.toPromoterType() ==
+                                PromoterType.detractor
+                            ? Theme.of(context).indicatorColor
+                            : Theme.of(context).textTheme.caption.color),
+                  ),
+                  alignment: Alignment.centerLeft,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Text(
+                    this.widget.texts.promoterScoreLabelText,
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: _currentScore.toPromoterType() ==
+                                PromoterType.promoter
+                            ? Theme.of(context).indicatorColor
+                            : Theme.of(context).textTheme.caption.color),
+                  ),
+                  alignment: Alignment.centerRight,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          ButtonTheme(
+            minWidth: 150,
+            height: 45,
+            child: RaisedButton(
+              onPressed: this._currentScore ==
+                      null // Enable the button only if the user selected score
+                  ? null
+                  : () {
+                      this.widget.onSendButtonPressed();
+                    },
+              child: Text(this.widget.texts.submitButtonText),
+              color: Theme.of(context).buttonColor,
+              splashColor: Colors.transparent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
     );
   }
 }
