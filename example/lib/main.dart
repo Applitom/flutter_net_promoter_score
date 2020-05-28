@@ -14,10 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Net Promoter Score Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       home: MyHomePage(title: 'Net Promoter Score Demo'),
     );
   }
@@ -68,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       thankYouIcon: Icon(
         Icons.thumb_up,
       ),
-      theme: ThemeData.dark()
+      // theme: ThemeData.dark()
     );
   }
 
