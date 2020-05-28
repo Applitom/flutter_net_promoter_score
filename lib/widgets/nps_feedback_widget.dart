@@ -93,7 +93,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
         horizontal: 10,
       ),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: Theme.of(context).focusColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
@@ -101,6 +101,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
         controller: _feedbackTextFieldController,
         decoration: InputDecoration.collapsed(
           hintText: _hintTextForFeedbackTextField(),
+          hintStyle: TextStyle(color: Theme.of(context).hintColor),
         ),
       ),
     );
@@ -139,7 +140,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
             ),
             Text(
               _mainTextAccordingToPromoterType(),
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+              style: Theme.of(context).textTheme.subtitle2,
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -170,7 +171,7 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                     this.widget.onSendButtonPressed();
                   },
                   child: Text(this.widget.texts.submitButtonText),
-                  color: Colors.grey,
+                  color: Theme.of(context).buttonColor,
                   minWidth: 150,
                   height: 45,
                   splashColor: Colors.transparent,

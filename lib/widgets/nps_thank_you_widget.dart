@@ -44,7 +44,10 @@ class NpsThankYouWidgetState extends State<NpsThankYouWidget> {
           SizedBox(
             height: 5,
           ),
-          Text(this.widget.texts.thankYouLabelText),
+          Text(
+            this.widget.texts.thankYouLabelText,
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
           SizedBox(
             height: 10,
           ),

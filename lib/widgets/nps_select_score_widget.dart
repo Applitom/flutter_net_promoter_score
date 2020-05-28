@@ -75,7 +75,6 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
               child: new IconButton(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  hoverColor: Colors.yellow,
                   padding: new EdgeInsets.all(0.0),
                   icon: new Icon(Icons.close, size: 22.0),
                   onPressed: () {
@@ -91,7 +90,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
         ),
         Text(
           this.widget.texts.surveyQuestionText,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.subtitle2,
           textAlign: TextAlign.center,
         ),
         SizedBox(
@@ -113,6 +112,8 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             this.widget.onScoreChanged(_currentScore);
           },
           thumbColor: Theme.of(context).indicatorColor,
+          backgroundColor: Theme.of(context).focusColor,
+          scoreDotColor: Theme.of(context).disabledColor,
         ),
         SizedBox(
           height: 2,
@@ -163,7 +164,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                     this.widget.onSendButtonPressed();
                   },
             child: Text(this.widget.texts.submitButtonText),
-            color: Colors.grey,
+            color: Theme.of(context).buttonColor,
             splashColor: Colors.transparent,
           ),
         ),

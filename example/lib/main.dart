@@ -66,8 +66,9 @@ class _MyHomePageState extends State<MyHomePage> {
         print("User change the feedback to $newFeedback");
       },
       thankYouIcon: Icon(
-        Icons.mood,
+        Icons.thumb_up,
       ),
+      theme: ThemeData.dark()
     );
   }
 
