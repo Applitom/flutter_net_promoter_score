@@ -44,14 +44,14 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             child: Center(
               child: Text(
                 currentScoreNumber.toString(),
-                style: TextStyle(
-                  fontWeight: currentScoreNumber == _currentScore
-                      ? FontWeight.bold
-                      : FontWeight.normal,
-                  color: currentScoreNumber == _currentScore
-                      ? Theme.of(context).indicatorColor
-                      : Theme.of(context).textTheme.bodyText1.color,
-                ),
+                style: Theme.of(context).textTheme.caption.copyWith(
+                      fontWeight: currentScoreNumber == _currentScore
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: currentScoreNumber == _currentScore
+                          ? Theme.of(context).indicatorColor
+                          : Theme.of(context).textTheme.bodyText1.color,
+                    ),
               ),
             ),
             color: Colors.transparent,
@@ -127,7 +127,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                 child: Container(
                   child: Text(
                     this.widget.texts.detractorScoreLabelText,
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.caption.copyWith(
                         fontSize: 12,
                         color: _currentScore.toPromoterType() ==
                                 PromoterType.detractor
@@ -141,7 +141,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                 child: Container(
                   child: Text(
                     this.widget.texts.promoterScoreLabelText,
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.caption.copyWith(
                         fontSize: 12,
                         color: _currentScore.toPromoterType() ==
                                 PromoterType.promoter
@@ -166,7 +166,10 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                   : () {
                       this.widget.onSendButtonPressed();
                     },
-              child: Text(this.widget.texts.submitButtonText),
+              child: Text(
+                this.widget.texts.submitButtonText,
+                style: Theme.of(context).textTheme.button,
+              ),
               color: Theme.of(context).buttonColor,
               splashColor: Colors.transparent,
             ),

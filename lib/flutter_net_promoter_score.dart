@@ -191,7 +191,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
               right: 0),
           child: AnimatedSwitcher(
             child: _pageBuilders[_currentPage.index](),
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 400),
             transitionBuilder: (Widget child, Animation<double> animation) {
               final outAnimation =
                   Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0))

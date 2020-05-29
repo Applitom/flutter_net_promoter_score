@@ -157,10 +157,13 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                 MaterialButton(
                   onPressed: () {
                     // Dismiss keyboard first
-                    FocusScope.of(context).requestFocus(new FocusNode());                    
+                    FocusScope.of(context).requestFocus(new FocusNode());
                     this.widget.onEditScoreButtonPressed();
                   },
-                  child: Text(this.widget.texts.editScoreButtonText),
+                  child: Text(
+                    this.widget.texts.editScoreButtonText,
+                    style: Theme.of(context).textTheme.button,
+                  ),
                   minWidth: 150,
                   height: 45,
                   splashColor: Colors.transparent,
@@ -174,7 +177,10 @@ class NpsFeedbackWidgetState extends State<NpsFeedbackWidget> {
                     FocusScope.of(context).requestFocus(new FocusNode());
                     this.widget.onSendButtonPressed();
                   },
-                  child: Text(this.widget.texts.submitButtonText),
+                  child: Text(
+                    this.widget.texts.submitButtonText,
+                    style: Theme.of(context).textTheme.button,
+                  ),
                   color: Theme.of(context).buttonColor,
                   minWidth: 150,
                   height: 45,
