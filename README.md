@@ -57,6 +57,13 @@ Example:
 ```
 
 ### Customize texts
+You can customize the component texts and set your own texts by passing the `text` parameter.
+The `text` parameter contains the following members. Change this members to set you own texts.
+
+- `selectScorePageTexts`-  Controls the first view texts: *"Select Score"* .
+- `feedbackPageTexts` - Controls the second view texts: *"Feedback"*.
+- `thankYouPageTexts` - Controls the last view texts: *"Thank You"*.
+
 ### Customize look and feel
 
 ## Example Project
