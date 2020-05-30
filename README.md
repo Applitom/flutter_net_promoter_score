@@ -12,18 +12,18 @@ Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedia.
 ## How to use
 ### Installation
 Add flutter_net_promoter_score to oyou project dependencies
-```
+```yaml
 dependencies:
   flutter_net_promoter_score:
 ```
 ### Show the survey
 Import flutter_net_promoter_score the  you want to show the NPS Survey
-```
+```dart
 import 'package:flutter_net_promoter_score/flutter_net_promoter_score.dart';
 ```
 In order to show the survery call the function `showNetPromoterScore` and provide the required parameters
 Example:
-```
+```dart
   void _showNPS() {
     showNetPromoterScore(
       context: context,
@@ -65,6 +65,9 @@ The `text` parameter contains the following members. Change this members to set 
 - `thankYouPageTexts` - Controls the last view texts: *"Thank You"*.
 
 ### Customize look and feel
+`flutter_net_promoter_score` support Theme mechanizem and gets its look and feel by the app's ThemeData.
+To customize the look and feel you can use the `theme` parameter and change it according to the following parameters:
+
 
 ## Example Project
 
