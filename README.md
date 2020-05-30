@@ -1,13 +1,14 @@
 # flutter_net_promoter_score
 
-Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedia.org/wiki/Net_Promoter) survey dialog to the user.
+A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedia.org/wiki/Net_Promoter) survey.
+
 
 ## Features
 - Show Net Promoter Score survey
 - Get user interactions call backs (such as score changes and feedback input)
-- Get final survery with Score, Promoter type and feedback text.
+- Get final survery result with Score, Promoter type and feedback text.
 - Support flutter themes to customize look and feel
-- Customize texts
+- Customize all texts with your own texts.
 
 ## How to use
 ### Installation
@@ -65,7 +66,7 @@ The `text` parameter contains the following members. Change this members to set 
 - `thankYouPageTexts` - Controls the last view texts: *"Thank You"*.
 
 ### Customize look and feel
-`flutter_net_promoter_score` support Theme mechanizem and gets its look and feel by the app's ThemeData.
+`flutter_net_promoter_score` supports Flutter's themes mechanism and gets its look and feel by the app's ThemeData.
 To customize the look and feel you can use the `theme` parameter and change it according to the following parameters:
 
 
