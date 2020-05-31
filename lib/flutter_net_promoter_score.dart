@@ -28,6 +28,7 @@ import 'model/nps_survey_page.dart';
 /// 
 /// Use `theme` parameter to customize the look and feel of the survey. change font and colors using [ThemeData] object
 /// 
+/// Use `thankYouIcon` parameter to provide a your own [Widget] for the Thank You view image
 /// ```dart
 /// showNetPromoterScore(
 ///   context: context,
