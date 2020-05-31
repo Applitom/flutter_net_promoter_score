@@ -10,6 +10,55 @@ import 'model/net_promoter_score_result.dart';
 import 'model/nps_survey_page.dart';
 
 /// Show a modal Net Promoter Score as a material design bottom sheet.
+/// 
+/// The `context` argument is used to look up the [Navigator] and [Theme] for
+/// the bottom sheet. It is only used when the method is called. Its
+/// corresponding widget can be safely removed from the tree before the bottom
+/// sheet is closed.
+/// 
+/// Use `onClosePressed` parameter to get callback when the user close the survery using the close button
+/// 
+/// Use `onScoreChanged` parameter to get callback when the user change the score
+/// 
+/// Use `onFeedbackChanged` parameter to get callback when the user change the feedback text field
+/// 
+/// Use `onSurveyCompleted` parameter to get callback when the survery is campleted. This callback will provide [NetPromoterScoreResult] object with the final survery results.
+/// 
+/// Use `texts` parameter to customize the text in the survery using your own texts.
+/// 
+/// Use `theme` parameter to customize the look and feel of the survey. change font and colors using [ThemeData] object
+/// 
+/// ```dart
+/// showNetPromoterScore(
+///   context: context,
+///   texts: NpsSurveyTexts(
+///     selectScorePageTexts: NpsSelectScorePageTexts(
+///       surveyQuestionText:
+///           "How likely are you to recommend flutter_net_promoter_score to a friend or colleague?",
+///     ),
+///   ),
+///   onSurveyCompleted: (result) {
+///     print("NPS Completed");
+///     print("Score: ${result.score}");
+///     print("Feedback: ${result.feedback}");
+///     print("Promoter Type: ${result.promoterType}");
+///   },
+///   onClosePressed: () {
+///     print("User closed the survery");
+///   },
+///   onScoreChanged: (newScore) {
+///     print("User changed the score to $newScore");
+///   },
+///   onFeedbackChanged: (newFeedback) {
+///     print("User change the feedback to $newFeedback");
+///   },
+///   thankYouIcon: Icon(
+///     Icons.thumb_up,
+///   ),
+///   theme: ThemeData.dark()
+/// );
+/// ```
+/// 
 Future<T> showNetPromoterScore<T>({
   @required BuildContext context,
   ThemeData theme,
