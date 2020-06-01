@@ -1,7 +1,7 @@
 name: flutter_net_promoter_score
 description: Presents Net Promoter Score (NPS) survey.
 version: 1.0.0
-homepage: http://www.applitom.com
+homepage: https://github.com/applitom/flutter_net_promoter_score
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

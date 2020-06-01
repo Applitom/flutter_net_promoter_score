@@ -10,6 +10,16 @@ A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedi
 - Support flutter themes to customize look and feel
 - Customize all texts with your own texts.
 
+## Table of contents
+- [How to use](#How-to-use)
+  - [Installation](#Installation)
+  - [Show the survey](#Show-the-survey)
+  - [Customize texts](#Customize-texts)
+  - [Theming](#Theming)
+- [Change Log](#Change-Log)
+- [Contribution](#Contribution)
+- [Author](#Author)
+
 ## How to use
 ### Installation
 Add flutter_net_promoter_score to oyou project dependencies
@@ -65,11 +75,11 @@ The `text` parameter contains the following members. Change this members to set 
 - `feedbackPageTexts` - Controls the second view texts: *"Feedback"*.
 - `thankYouPageTexts` - Controls the last view texts: *"Thank You"*.
 
-### Customize look and feel
-`flutter_net_promoter_score` supports Flutter's themes mechanism and gets its look and feel by the app's ThemeData.
+### Theming
+`flutter_net_promoter_score` supports Flutter's themes and gets its look and feel by the app's default Theme style.
 To customize the look and feel with your favorites appearance you can use the `theme` parameter and change it according to the following parameters:
 
-| ThemeData Property | Type | Description  |
+| Attributes | Type | Description  |
 |--------------------|:----:|:-------------|
 | `cardColor` | Color | Change Background Color |
 | `textTheme.caption` | TextStyle | Labels style |
@@ -83,10 +93,11 @@ To customize the look and feel with your favorites appearance you can use the `t
 | `iconTheme` | IconThemeData | Close button icon and default thank you icon IconThemeData |
 | `hintColor` | Color | Feedback field hint text color |
 
-## Example Project
-
 ## Change Log
 See [Change Log](./CHANGELOG.md) page.
+
+## Contribution
+Please file feature requests and bugs at the [issue tracker](https://github.com/applitom/flutter_net_promoter_score/issues).
 
 ## Author
 [Tomer Shalom](http://applitom.com)
