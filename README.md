@@ -67,8 +67,21 @@ The `text` parameter contains the following members. Change this members to set 
 
 ### Customize look and feel
 `flutter_net_promoter_score` supports Flutter's themes mechanism and gets its look and feel by the app's ThemeData.
-To customize the look and feel you can use the `theme` parameter and change it according to the following parameters:
+To customize the look and feel with your favorites appearance you can use the `theme` parameter and change it according to the following parameters:
 
+| ThemeData Property | Type | Description  |
+|--------------------|:----:|:-------------|
+| `cardColor` | Color | Change Background Color |
+| `textTheme.caption` | TextStyle | Labels style |
+| `textTheme.subtitle2` | TextStyle | Questions and titles style |
+| `bodyText1.bodyText1` | TextStyle | Score numbers text style |
+| `textTheme.button` | TextStyle | Buttons text style |
+| `indicatorColor` | Color | Selected score color |
+| `buttonColor` | Color | Buttons background color|
+| `focusColor` | Color | Score slider and text field background color |
+| `disabledColor` | Color | Score slider unselected dots color |
+| `iconTheme` | IconThemeData | Close button icon and default thank you icon IconThemeData |
+| `hintColor` | Color | Feedback field hint text color |
 
 ## Example Project
 
