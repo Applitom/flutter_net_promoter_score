@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_score_slider/flutter_score_slider.dart';
 import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
-import 'package:flutter_net_promoter_score/widgets/score_slider.dart';
 import 'package:flutter_net_promoter_score/model/promoter_type.dart';
 
 class NpsSelectScoreWidget extends StatefulWidget {
