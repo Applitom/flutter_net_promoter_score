@@ -9,9 +9,9 @@ A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedi
 ## Features
 - Show Net Promoter Score survey
 - Get user interactions call backs (such as score changes and feedback input)
-- Get final survery result with Score, Promoter type and feedback text.
+- Get final survery result with Score, Promoter type and feedback text
 - Support flutter themes to customize look and feel
-- Customize all texts with your own texts.
+- Customize all texts with your own textss
 
 ## Table of contents
 - [How to use](#How-to-use)
@@ -25,17 +25,20 @@ A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedi
 
 ## How to use
 ### Installation
-Add flutter_net_promoter_score to oyou project dependencies
+Add flutter_net_promoter_score to your project dependencies
 ```yaml
 dependencies:
   flutter_net_promoter_score:
 ```
 ### Show the survey
-Import flutter_net_promoter_score the  you want to show the NPS Survey
+Import flutter_net_promoter_score
+
 ```dart
 import 'package:flutter_net_promoter_score/flutter_net_promoter_score.dart';
 ```
-In order to show the survery call the function `showNetPromoterScore` and provide the required parameters
+
+In order to show the survery call the function `showNetPromoterScore` and provide the required parameters.
+
 Example:
 ```dart
   void _showNPS() {
@@ -71,7 +74,7 @@ Example:
 ```
 
 ### Customize texts
-You can customize the component texts and set your own texts by passing the `text` parameter.
+You can customize the texts with your own texts by passing the `text` parameter.
 The `text` parameter contains the following members. Change this members to set you own texts.
 
 - `selectScorePageTexts`-  Controls the first view texts: *"Select Score"* .
@@ -80,7 +83,7 @@ The `text` parameter contains the following members. Change this members to set 
 
 ### Theming
 `flutter_net_promoter_score` supports Flutter's themes and gets its look and feel by the app's default Theme style.
-To customize the look and feel with your favorites appearance you can use the `theme` parameter and change it according to the following parameters:
+To customize the look and feel with your favorite appearance you can use the `theme` parameter and change it according to the following parameters:
 
 | Attributes | Type | Description  |
 |--------------------|:----:|:-------------|
