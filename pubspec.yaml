@@ -1,5 +1,5 @@
 name: flutter_net_promoter_score
-description: Presents Net Promoter Score (NPS) survey.
+description: Simple Flutter component that presents Net Promoter Score (NPS) survey.
 version: 1.0.0
 homepage: https://github.com/applitom/flutter_net_promoter_score
 
