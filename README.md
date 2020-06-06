@@ -3,7 +3,7 @@
 A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedia.org/wiki/Net_Promoter) survey.
 
 <p align="center">
-<img src="./screenshots/demo.gif"/>
+<img src="https://raw.githubusercontent.com/Applitom/flutter_net_promoter_score/master/screenshots/demo.gif"/>
 </p>
 
 ## Features
