@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       thankYouIcon: Icon(
         Icons.thumb_up,
       ),
-      theme: ThemeData.dark()
+      theme: ThemeData.light()
     );
   }
 

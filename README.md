@@ -4,11 +4,7 @@ A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedi
 
 
 <center>
-<div style="width: 100vw;">
-<img src="./screenshots/select_score.png" style="width: 30%"/>
-<img src="./screenshots/feedback.png" style="width: 30%"/>
-<img src="./screenshots/thank_you.png" style="width: 30%"/>
-</div>
+<img src="./screenshots/demo.gif"/>
 </center>
 
 ## Features
