@@ -3,13 +3,11 @@
 A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedia.org/wiki/Net_Promoter) survey.
 
 
-<center>
-<div style="width: 100vw;">
-<img src="./screenshots/select_score.png" style="width: 30%"/>
-<img src="./screenshots/feedback.png" style="width: 30%"/>
-<img src="./screenshots/thank_you.png" style="width: 30%"/>
+<div width="100%">
+<img src="./screenshots/select_score.png" width="30%"/>
+<img src="./screenshots/feedback.png" width="30%"/>
+<img src="./screenshots/thank_you.png" width="30%"/>
 </div>
-</center>
 
 ## Features
 - Show Net Promoter Score survey
