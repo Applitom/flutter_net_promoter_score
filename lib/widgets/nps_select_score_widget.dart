@@ -110,7 +110,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             minScore: 0,
             height: 35,
             score: _currentScore,
-            onScorChanged: (int newScore) {
+            onScoreChanged: (int newScore) {
               setState(() => _currentScore = newScore);
               this.widget.onScoreChanged(_currentScore);
             },

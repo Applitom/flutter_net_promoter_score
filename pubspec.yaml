@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  flutter_score_slider: ^1.0.0
+  flutter_score_slider: ^1.0.1
   
 dev_dependencies:
   flutter_test:
