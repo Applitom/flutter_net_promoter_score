@@ -114,9 +114,9 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
               setState(() => _currentScore = newScore);
               this.widget.onScoreChanged(_currentScore);
             },
-            thumbColor: Theme.of(context).indicatorColor,
-            backgroundColor: Theme.of(context).focusColor,
-            scoreDotColor: Theme.of(context).disabledColor,
+            thumbColor: Theme.of(context).sliderTheme.thumbColor,
+            backgroundColor: Theme.of(context).backgroundColor,
+            scoreDotColor: Theme.of(context).sliderTheme.activeTickMarkColor,
           ),
           SizedBox(
             height: 2,

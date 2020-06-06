@@ -86,10 +86,11 @@ To customize the look and feel with your favorites appearance you can use the `t
 | `textTheme.subtitle2` | TextStyle | Questions and titles style |
 | `bodyText1.bodyText1` | TextStyle | Score numbers text style |
 | `textTheme.button` | TextStyle | Buttons text style |
-| `indicatorColor` | Color | Selected score color |
+| `sliderTheme.thumbColor` | Color | Selected score color |
 | `buttonColor` | Color | Buttons background color|
-| `focusColor` | Color | Score slider and text field background color |
-| `disabledColor` | Color | Score slider unselected dots color |
+| `focusColor` | Color | text field background color |
+| `backgroundColor` | Color | Score slider background color |
+| `sliderTheme.activeTickMarkColor` | Color | Score slider unselected dots color |
 | `iconTheme` | IconThemeData | Close button icon and default thank you icon IconThemeData |
 | `hintColor` | Color | Feedback field hint text color |
 
