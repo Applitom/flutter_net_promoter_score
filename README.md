@@ -1,11 +1,10 @@
-# flutter_net_promoter_score
+# Flutter Net Promoter Score
 
 A Flutter component that presents [Net Promoter Score (NPS)](https://en.wikipedia.org/wiki/Net_Promoter) survey.
 
-
-<center>
+<p align="center">
 <img src="./screenshots/demo.gif"/>
-</center>
+</p>
 
 ## Features
 - Show Net Promoter Score survey
