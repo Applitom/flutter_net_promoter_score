@@ -53,7 +53,7 @@ class NpsThankYouPageTexts {
 
   const NpsThankYouPageTexts({
     this.thankYouLabelText = "Thanks for your feedback!",
-  }) : assert(thankYouLabelText != null);
+  });
 }
 
 class NpsSurveyTexts {
