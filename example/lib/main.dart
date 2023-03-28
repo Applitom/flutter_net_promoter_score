@@ -80,12 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
+            OutlinedButton(
               onPressed: () {
                 _showNPS();
               },
               child: Text("Show NPS"),
-              color: Colors.grey,
             ),
           ],
         ),
