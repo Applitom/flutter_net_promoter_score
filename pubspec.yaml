@@ -10,7 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   
-  flutter_score_slider: ^1.0.1
+  flutter_score_slider:
+    git:
+      url: https://github.com/covelline/flutter_score_slider
   
 dev_dependencies:
   flutter_test:

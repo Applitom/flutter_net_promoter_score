@@ -57,10 +57,11 @@ packages:
   flutter_score_slider:
     dependency: "direct main"
     description:
-      name: flutter_score_slider
-      sha256: "821abc727adaf9430ff452098c7a15a63764b8e21443fd59f01a66b4340cd3b3"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "01f333356b64c61666ef6a6d6ba6f8b714d0436f"
+      url: "https://github.com/covelline/flutter_score_slider"
+    source: git
     version: "1.0.1"
   flutter_test:
     dependency: "direct dev"
