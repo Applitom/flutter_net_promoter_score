@@ -64,7 +64,7 @@ Future<T?> showNetPromoterScore<T>({
   required BuildContext context,
   ThemeData? theme,
   VoidCallback? onClosePressed,
-  Function(int newScore)? onScoreChanged,
+  Function(int? newScore)? onScoreChanged,
   Function(String newFeedback)? onFeedbackChanged,
   Function(NetPromoterScoreResult result)? onSurveyCompleted,
   NpsSurveyTexts texts = const NpsSurveyTexts(),
@@ -123,7 +123,7 @@ class FlutterNetPromoterScore extends StatefulWidget {
   final NpsSurveyTexts texts;
   final VoidCallback? onClosePressed;
   final void Function(NetPromoterScoreResult result)? onSurveyCompleted;
-  final Function(int newScore)? onScoreChanged;
+  final Function(int? newScore)? onScoreChanged;
   final Function(String newFeedback)? onFeedbackChanged;
   final ThemeData? theme;
   final Widget? thankYouIcon;
@@ -143,7 +143,7 @@ class FlutterNetPromoterScore extends StatefulWidget {
 }
 
 class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
-  late int _currentScore;
+  int? _currentScore;
   String _currentFeedbackText = "";
 
   NpsSurveyPage _currentPage = NpsSurveyPage.score;
@@ -201,7 +201,7 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
       onSendButtonPressed: () {
         setState(() => _currentPage = NpsSurveyPage.feedback);
       },
-      onScoreChanged: (int score) {
+      onScoreChanged: (int? score) {
         _currentScore = score;
         if (this.widget.onScoreChanged != null) {
           this.widget.onScoreChanged!(score);

@@ -4,10 +4,10 @@ import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
 import 'package:flutter_net_promoter_score/model/promoter_type.dart';
 
 class NpsSelectScoreWidget extends StatefulWidget {
-  final int score;
+  final int? score;
   final VoidCallback onClosePressed;
   final VoidCallback onSendButtonPressed;
-  final void Function(int score) onScoreChanged;
+  final void Function(int? score) onScoreChanged;
   final NpsSelectScorePageTexts texts;
 
   NpsSelectScoreWidget({
@@ -16,7 +16,7 @@ class NpsSelectScoreWidget extends StatefulWidget {
     required this.onSendButtonPressed,
     required this.onClosePressed,
     required this.onScoreChanged,
-    required this.score,
+    this.score,
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class NpsSelectScoreWidget extends StatefulWidget {
 }
 
 class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
-  late int _currentScore;
+  int? _currentScore;
 
   @override
   void initState() {
