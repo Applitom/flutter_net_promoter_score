@@ -7,18 +7,18 @@ class NpsFeedbackWidget extends StatefulWidget {
   final VoidCallback onClosePressed;
   final VoidCallback onEditScoreButtonPressed;
   final VoidCallback onSendButtonPressed;
-  final PromoterType promoterType;
+  final PromoterType? promoterType;
   final Function(String feedbackText) onFeedbackTextChanged;
   final NpsFeedbackPageTexts texts;
 
   NpsFeedbackWidget({
-    Key key,
-    @required this.texts,
-    this.onEditScoreButtonPressed,
-    this.onClosePressed,
-    this.onSendButtonPressed,
-    this.onFeedbackTextChanged,
-    this.feedbackText,
+    Key? key,
+    required this.texts,
+    required this.onEditScoreButtonPressed,
+    required this.onClosePressed,
+    required this.onSendButtonPressed,
+    required this.feedbackText,
+    required this.onFeedbackTextChanged,
     this.promoterType,
   })  : assert(texts != null),
         super(key: key);

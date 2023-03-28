@@ -4,18 +4,18 @@ import 'package:flutter_net_promoter_score/model/nps_survey_texts.dart';
 import 'package:flutter_net_promoter_score/model/promoter_type.dart';
 
 class NpsSelectScoreWidget extends StatefulWidget {
-  final int score;
+  final int? score;
   final VoidCallback onClosePressed;
   final VoidCallback onSendButtonPressed;
-  final void Function(int score) onScoreChanged;
+  final void Function(int? score) onScoreChanged;
   final NpsSelectScorePageTexts texts;
 
   NpsSelectScoreWidget({
-    Key key,
-    @required this.texts,
-    this.onSendButtonPressed,
-    this.onClosePressed,
-    this.onScoreChanged,
+    Key? key,
+    required this.texts,
+    required this.onSendButtonPressed,
+    required this.onClosePressed,
+    required this.onScoreChanged,
     this.score,
   }) : super(key: key);
 
@@ -24,7 +24,7 @@ class NpsSelectScoreWidget extends StatefulWidget {
 }
 
 class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
-  int _currentScore;
+  int? _currentScore;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
   }
 
   List<Widget> _numbers() {
-    List<Widget> numbers = List<Widget>();
+    List<Widget> numbers = List.empty(growable: true);
 
     for (var currentScoreNumber = 0;
         currentScoreNumber <= 10;
@@ -44,13 +44,13 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
             child: Center(
               child: Text(
                 currentScoreNumber.toString(),
-                style: Theme.of(context).textTheme.caption.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       fontWeight: currentScoreNumber == _currentScore
                           ? FontWeight.bold
                           : FontWeight.normal,
                       color: currentScoreNumber == _currentScore
                           ? Theme.of(context).indicatorColor
-                          : Theme.of(context).textTheme.bodyText1.color,
+                          : Theme.of(context).textTheme.bodyLarge!.color,
                     ),
               ),
             ),
@@ -127,12 +127,12 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                 child: Container(
                   child: Text(
                     this.widget.texts.detractorScoreLabelText,
-                    style: Theme.of(context).textTheme.caption.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontSize: 12,
                         color: _currentScore.toPromoterType() ==
                                 PromoterType.detractor
                             ? Theme.of(context).indicatorColor
-                            : Theme.of(context).textTheme.caption.color),
+                            : Theme.of(context).textTheme.bodySmall!.color),
                   ),
                   alignment: Alignment.centerLeft,
                 ),
@@ -141,12 +141,12 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                 child: Container(
                   child: Text(
                     this.widget.texts.promoterScoreLabelText,
-                    style: Theme.of(context).textTheme.caption.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontSize: 12,
                         color: _currentScore.toPromoterType() ==
                                 PromoterType.promoter
                             ? Theme.of(context).indicatorColor
-                            : Theme.of(context).textTheme.caption.color),
+                            : Theme.of(context).textTheme.bodySmall!.color),
                   ),
                   alignment: Alignment.centerRight,
                 ),
@@ -159,7 +159,7 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
           ButtonTheme(
             minWidth: 150,
             height: 45,
-            child: RaisedButton(
+            child: ElevatedButton(
               onPressed: this._currentScore ==
                       null // Enable the button only if the user selected score
                   ? null
@@ -170,8 +170,6 @@ class NpsSelectScoreWidgetState extends State<NpsSelectScoreWidget> {
                 this.widget.texts.submitButtonText,
                 style: Theme.of(context).textTheme.button,
               ),
-              color: Theme.of(context).buttonColor,
-              splashColor: Colors.transparent,
             ),
           ),
           SizedBox(

@@ -4,13 +4,15 @@ version: 1.0.0
 homepage: https://github.com/applitom/flutter_net_promoter_score
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.17.5 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   
-  flutter_score_slider: ^1.0.1
+  flutter_score_slider:
+    git:
+      url: https://github.com/covelline/flutter_score_slider
   
 dev_dependencies:
   flutter_test:

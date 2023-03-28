@@ -60,21 +60,20 @@ import 'model/nps_survey_page.dart';
 /// );
 /// ```
 /// 
-Future<T> showNetPromoterScore<T>({
-  @required BuildContext context,
-  ThemeData theme,
-  VoidCallback onClosePressed,
-  Function(int newScore) onScoreChanged,
-  Function(String newFeedback) onFeedbackChanged,
-  Function(NetPromoterScoreResult result) onSurveyCompleted,
+Future<T?> showNetPromoterScore<T>({
+  required BuildContext context,
+  ThemeData? theme,
+  VoidCallback? onClosePressed,
+  Function(int? newScore)? onScoreChanged,
+  Function(String newFeedback)? onFeedbackChanged,
+  Function(NetPromoterScoreResult result)? onSurveyCompleted,
   NpsSurveyTexts texts = const NpsSurveyTexts(),
-  Widget thankYouIcon,
+  Widget? thankYouIcon,
 }) {
-  assert(texts != null);
 
   bool currentlyShowingSurvey = true;
 
-  Future<T> future = showModalBottomSheet(
+  Future<T?> future = showModalBottomSheet(
     backgroundColor: Colors.transparent,
     isDismissible: false,
     isScrollControlled: true,
@@ -122,12 +121,12 @@ Future<T> showNetPromoterScore<T>({
 
 class FlutterNetPromoterScore extends StatefulWidget {
   final NpsSurveyTexts texts;
-  final VoidCallback onClosePressed;
-  final void Function(NetPromoterScoreResult result) onSurveyCompleted;
-  final Function(int newScore) onScoreChanged;
-  final Function(String newFeedback) onFeedbackChanged;
-  final ThemeData theme;
-  final Widget thankYouIcon;
+  final VoidCallback? onClosePressed;
+  final void Function(NetPromoterScoreResult result)? onSurveyCompleted;
+  final Function(int? newScore)? onScoreChanged;
+  final Function(String newFeedback)? onFeedbackChanged;
+  final ThemeData? theme;
+  final Widget? thankYouIcon;
 
   FlutterNetPromoterScore({
     this.onSurveyCompleted,
@@ -137,18 +136,18 @@ class FlutterNetPromoterScore extends StatefulWidget {
     this.theme,
     this.texts = const NpsSurveyTexts(),
     this.thankYouIcon,
-  }) : assert(texts != null);
+  });
 
   @override
   FlutterNetPromoterScoreState createState() => FlutterNetPromoterScoreState();
 }
 
 class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
-  int _currentScore;
+  int? _currentScore;
   String _currentFeedbackText = "";
 
   NpsSurveyPage _currentPage = NpsSurveyPage.score;
-  List<Widget Function()> _pageBuilders = List<Widget Function()>();
+  List<Widget Function()> _pageBuilders = List<Widget Function()>.empty(growable: true);
 
   @override
   void initState() {
@@ -183,12 +182,12 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
       onFeedbackTextChanged: (String feedbackText) {
         _currentFeedbackText = feedbackText;
         if (this.widget.onFeedbackChanged != null) {
-          this.widget.onFeedbackChanged(feedbackText);
+          this.widget.onFeedbackChanged!(feedbackText);
         }
       },
       onClosePressed: () {
         if (this.widget.onClosePressed != null) {
-          this.widget.onClosePressed();
+          this.widget.onClosePressed!();
         }
       },
       feedbackText: _currentFeedbackText,
@@ -202,15 +201,15 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
       onSendButtonPressed: () {
         setState(() => _currentPage = NpsSurveyPage.feedback);
       },
-      onScoreChanged: (int score) {
+      onScoreChanged: (int? score) {
         _currentScore = score;
         if (this.widget.onScoreChanged != null) {
-          this.widget.onScoreChanged(score);
+          this.widget.onScoreChanged!(score);
         }
       },
       onClosePressed: () {
         if (this.widget.onClosePressed != null) {
-          this.widget.onClosePressed();
+          this.widget.onClosePressed!();
         }
       },
       score: _currentScore,
@@ -225,14 +224,14 @@ class FlutterNetPromoterScoreState extends State<FlutterNetPromoterScore> {
       finalResult.feedback = _currentFeedbackText;
       finalResult.promoterType = _currentScore.toPromoterType();
 
-      this.widget.onSurveyCompleted(finalResult);
+      this.widget.onSurveyCompleted!(finalResult);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: this.widget.theme == null ? Theme.of(context) : this.widget.theme,
+      data: this.widget.theme == null ? Theme.of(context) : this.widget.theme!,
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
